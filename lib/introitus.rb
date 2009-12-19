@@ -58,3 +58,16 @@ class Array
 
   protected :find_string_of_length, :str_length, :to_string
 end
+
+class Numeric
+  def nearest_power_of(x=2)
+  end
+
+  def valid_subdiv?
+  end
+  
+  def mod_power_of(x=2)
+  end
+  
+  protected :mod_power_of
+end
