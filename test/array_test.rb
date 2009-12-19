@@ -29,26 +29,6 @@ describe "Array" do
     end
   end
   
-  describe "\b#str_length" do
-    before do
-      @arr1 = [1, 2, "hello", "c4"]
-      @arr2 = %w{ x y 17 whatever}
-      @arr3 = ["hello", "okgo", 7.5, 0.25]
-    end
-    
-    it "should return the correct value for @arr1" do
-      @arr1.str_length.should == 12
-    end
-    
-    it "should return the correct value for @arr2" do
-      @arr2.str_length.should == 15
-    end
-    
-    it "should return the correct value for @arr3" do
-      @arr3.str_length.should == 19
-    end
-  end
-  
   describe "\b#to_strings_of_length" do
     before do
       @arr1 = %w{hello my name is michael}
