@@ -60,13 +60,18 @@ class Array
 end
 
 class Numeric
-  def nearest_power_of(x=2)
+  def nearest_power_of(base=2)
+    power = -10
+    power += 1 while self >= base**power
+    base**(power-1)
   end
 
   def valid_subdiv?
+    self.mod_power_of(2).zero?
   end
   
-  def mod_power_of(x=2)
+  def mod_power_of(base=2)
+    self % self.nearest_power_of(base)
   end
   
   protected :mod_power_of
