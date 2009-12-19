@@ -95,6 +95,39 @@ class Numeric
 end
 
 class Object
-  def self.attr_validate *attrs
+  def self.attr_validate *attributes
+    create_validation_framework
+    attributes.each do |attribute|
+      create_accessors_for(attribute)
+    end
   end
+  
+  def self.create_validation_framework
+    class_eval <<-RUBY
+      @_validations = []
+      def self.validations
+        @_validations
+      end
+      def validate
+        self.class.validations.each do |validation|
+          self.__send__(validation) if self.respond_to?(validation)
+        end
+      end
+    RUBY
+  end
+  
+  def self.create_accessors_for(attribute)
+    class_eval <<-RUBY
+      @_validations << :validate_#{attribute}
+      def #{attribute}
+        @#{attribute}
+      end
+      def #{attribute}=(value)
+        @#{attribute} = value
+        self.validate
+      end
+    RUBY
+  end
+  
+  class << self; protected :create_validation_framework, :create_accessors_for; end
 end
