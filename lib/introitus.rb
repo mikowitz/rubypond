@@ -93,3 +93,8 @@ class Numeric
   
   protected :mod_power_of
 end
+
+class Object
+  def self.attr_validate *attrs
+  end
+end
