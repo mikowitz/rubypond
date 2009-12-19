@@ -1,10 +1,8 @@
 require 'rubygems'
-require 'test/unit'
-require 'shoulda'
+include Wheel
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rubypond'
 
-class Test::Unit::TestCase
-end
+Dir["test/**/*_test.rb"].each {|f| require f }

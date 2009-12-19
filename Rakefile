@@ -18,6 +18,12 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
+require 'wheel'
+desc "run wheel tests"
+task :wheel do
+  system("wheel test/test_helper.rb -cs")
+end
+
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'

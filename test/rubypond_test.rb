@@ -1,7 +1,3 @@
-require 'test_helper'
-
-class RubypondTest < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
-  end
+describe "Rubypond" do
+  it "should probably have some real tests..."
 end
