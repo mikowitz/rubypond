@@ -2,7 +2,7 @@ $:.unshift File.dirname(__FILE__)
 $:.unshift File.join File.dirname(__FILE__), "rubypond"
 
 require 'introitus'
-%w{ accidental flat natural sharp }.each {|file| require file }
+%w{ accidental flat natural pitch sharp }.each {|file| require file }
 
 module Rubypond
   ##
@@ -58,3 +58,15 @@ def gf; @@gf ||= Flat.new(g); end
 def af; @@af ||= Flat.new(a); end
 # @private
 def bf; @@bf ||= Flat.new(b); end
+
+0.upto(9) do |i|
+  %w{c d e f g a b c}.each do |p|
+    ["", "f", "s"].each do |s|
+      eval <<-RUBY
+        def #{p}#{s}#{i}
+          Pitch.new(#{p}#{s}, #{i})
+        end
+      RUBY
+    end
+  end
+end
