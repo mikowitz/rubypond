@@ -30,4 +30,12 @@ describe "Sharp" do
   it "#natural should return the correct value" do
     @fs.natural.should == f
   end
+  
+  describe "validations" do
+    [1, {1 => 2}, [1,2], "hello"].each do |accidental|
+      it "should raise an ArgumentError if created with #{accidental.inspect} as an accidental" do
+        lambda { Sharp.new(accidental) }.should raise_error ArgumentError
+      end
+    end
+  end
 end

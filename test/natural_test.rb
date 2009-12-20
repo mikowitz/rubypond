@@ -30,4 +30,18 @@ describe "Natural" do
   it "#natural should return the correct value" do
     @c.natural.should == c
   end
+  
+  describe "validations" do
+    ["x", 2, [1,2], {1 => 2}, true].each do |name|
+      it "should raise an ArgumentError if created with #{name.inspect} as a name" do
+        lambda { Natural.new(name, 0) }.should raise_error ArgumentError
+      end
+    end
+    
+    [-1, "x", [1,2], {1 => 2}, false, 0.5].each do |offset|
+      it "should raise an ArgumentError if created with #{offset.inspect} as an offset" do
+        lambda { Natural.new("c", offset) }.should raise_error ArgumentError
+      end
+    end
+  end
 end

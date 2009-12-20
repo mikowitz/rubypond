@@ -35,7 +35,7 @@ describe "Accidental" do
     end
 
     it "should return the correct value for 34" do
-      @bf.should == b
+      @bf.should == bf
     end
   end
   

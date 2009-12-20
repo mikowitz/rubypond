@@ -30,4 +30,12 @@ describe "Flat" do
   it "#natural should return the correct value" do
     @af.natural.should == a
   end
+  
+  describe "validations" do
+    [1, {1 => 2}, [1,2], "hello"].each do |accidental|
+      it "should raise an ArgumentError if created with #{accidental.inspect} as an accidental" do
+        lambda { Flat.new(accidental) }.should raise_error ArgumentError
+      end
+    end
+  end
 end
