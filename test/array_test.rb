@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Array" do
   describe "\b#sum" do
     before do

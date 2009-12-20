@@ -5,5 +5,3 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rubypond'
 include Rubypond
-
-Dir["test/**/*_test.rb"].each {|f| require f }

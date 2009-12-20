@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Accidental" do
   describe "\b.from_i" do
     before do 

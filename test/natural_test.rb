@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Natural" do
   before :each do
     @c = Natural.new("c", 0)

@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Numeric" do
   describe "\b#nearest_power_of" do
     @a = {

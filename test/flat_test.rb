@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Flat" do
   before :each do
     @af = Flat.new(a)

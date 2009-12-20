@@ -21,7 +21,7 @@ end
 require 'wheel'
 desc "run wheel tests"
 task :wheel do
-  system("wheel test/test_helper.rb -cs")
+  system("wheel #{FileList["test/*_test.rb"].join(" ")} -cs")
 end
 
 require 'rake/testtask'

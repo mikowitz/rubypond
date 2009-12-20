@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/test_helper"
+
 describe "Sharp" do
   before :each do
     @fs = Sharp.new(f)
