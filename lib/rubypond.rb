@@ -5,8 +5,21 @@ require 'introitus'
 %w{ accidental flat natural pitch sharp }.each {|file| require file }
 
 module Rubypond
+  ##
+  # Returns the Lilypond representation of a duration lasting
+  # <tt>duration</tt> sixteenth notes.
+  #
+  # @param [Numeric] duration
+  # @return [String] Lilypond
   def self.duration(duration)
-
+    duration = duration / 16.0
+    remainder = duration - duration.nearest_power_of
+    string = (1/duration.nearest_power_of).to_s
+    while remainder > 0
+      remainder -= remainder.nearest_power_of
+      string += "."
+    end
+    string
   end
 
   ##
