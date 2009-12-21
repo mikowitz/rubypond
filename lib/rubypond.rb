@@ -5,64 +5,71 @@ require 'introitus'
 %w{ accidental flat natural pitch sharp }.each {|file| require file }
 
 module Rubypond
+  def self.duration(duration)
+
+  end
+
   ##
   # Returns current version of Rubypond
   #
-  # @return[String]
+  # @return [String]
   def self.version
     File.open(File.join(File.dirname(__FILE__), "..", "VERSION"), "r").readline.strip
   end
 end
 
 # @private
-def c; @@c ||= Natural.new("c", 0); end
+def c; Natural.new("c", 0); end
 # @private
-def d; @@d ||= Natural.new("d", 2); end
+def d; Natural.new("d", 2); end
 # @private
-def e; @@e ||= Natural.new("e", 4); end
+def e; Natural.new("e", 4); end
 # @private
-def f; @@f ||= Natural.new("f", 5); end
+def f; Natural.new("f", 5); end
 # @private
-def g; @@g ||= Natural.new("g", 7); end
+def g; Natural.new("g", 7); end
 # @private
-def a; @@a ||= Natural.new("a", 9); end
+def a; Natural.new("a", 9); end
 # @private
-def b; @@b ||= Natural.new("b", 11); end
+def b; Natural.new("b", 11); end
 
 # @private
-def cs; @@cs ||= Sharp.new(c); end
+def cs; Sharp.new(c); end
 # @private
-def ds; @@ds ||= Sharp.new(d); end
+def ds; Sharp.new(d); end
 # @private
-def es; @@es ||= Sharp.new(e); end
+def es; Sharp.new(e); end
 # @private
-def fs; @@fs ||= Sharp.new(f); end
+def fs; Sharp.new(f); end
 # @private
-def gs; @@gs ||= Sharp.new(g); end
+def gs; Sharp.new(g); end
 # @private
-def as; @@as ||= Sharp.new(a); end
+def as; Sharp.new(a); end
 # @private
-def bs; @@bs ||= Sharp.new(b); end
+def bs; Sharp.new(b); end
 
 # @private
-def cf; @@cf ||= Flat.new(c); end
+def cf; Flat.new(c); end
 # @private
-def df; @@df ||= Flat.new(d); end
+def df; Flat.new(d); end
 # @private
-def ef; @@ef ||= Flat.new(e); end
+def ef; Flat.new(e); end
 # @private
-def ff; @@ff ||= Flat.new(f); end
+def ff; Flat.new(f); end
 # @private
-def gf; @@gf ||= Flat.new(g); end
+def gf; Flat.new(g); end
 # @private
-def af; @@af ||= Flat.new(a); end
+def af; Flat.new(a); end
 # @private
-def bf; @@bf ||= Flat.new(b); end
+def bf; Flat.new(b); end
 
 0.upto(9) do |i|
   %w{c d e f g a b c}.each do |p|
     ["", "f", "s"].each do |s|
       eval <<-RUBY
+        ##
+        #
+        # @private
         def #{p}#{s}#{i}
           Pitch.new(#{p}#{s}, #{i})
         end
