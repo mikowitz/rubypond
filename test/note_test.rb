@@ -15,19 +15,19 @@ describe "Note" do
     end
     
     it "should return the correct value for :pitches" do
-      @note.pitches.should == c4
+      @note.pitches.should == [c4]
     end
     
     it "should return the correct value for :duration" do
       @note.duration.should == 4
     end
 
-    it "should return the correct value for :last_pitch" do
-      @note.last_pitch.should == c4
+    it "should return the correct value for :reference_pitch" do
+      @note.reference_pitch.should == c4
     end
     
-    it "should return the correct value for :last_duration" do
-      @note.last_duration.should == 4
+    it "should return the correct value for :reference_duration" do
+      @note.reference_duration.should == 4
     end
     
     it "should return the correct_value for :to_s relative to Note.new(c4, 4)" do
@@ -64,12 +64,12 @@ describe "Note" do
       @note.duration.should == 4
     end
 
-    it "should return the correct value for :last_pitch" do
-      @note.last_pitch.should == c4
+    it "should return the correct value for :reference_pitch" do
+      @note.reference_pitch.should == c4
     end
     
-    it "should return the correct value for :last_duration" do
-      @note.last_duration.should == 4
+    it "should return the correct value for :reference_duration" do
+      @note.reference_duration.should == 4
     end
   
     it "should return the correct_value for :to_s relative to Note.new(c4, 4)" do
@@ -106,16 +106,16 @@ describe "Note" do
       @note.duration.should == 2
     end
 
-    it "should return the correct value for :last_pitch" do
-      @note.last_pitch.should == c4
+    it "should return the correct value for :reference_pitch" do
+      @note.reference_pitch.should == c4
     end
     
-    it "should return the correct value for :last_duration" do
-      @note.last_duration.should == 2
+    it "should return the correct value for :reference_duration" do
+      @note.reference_duration.should == 2
     end
   
     it "should return the correct_value for :to_s relative to Note.new(c4, 4)" do
-      @note.to_s(@c44).should == "<c e' fs>2"
+      @note.to_s(@c44).should == "<c e' fs>8"
     end
     
     it "should return the correct_value for :to_s relative to Note.new(c4, 2)" do
@@ -123,15 +123,15 @@ describe "Note" do
     end
     
     it "should return the correct_value for :to_s relative to Note.new(d4, 4)" do
-      @note.to_s(@d44).should == "<c e' fs>2"      
+      @note.to_s(@d44).should == "<c e' fs>8"      
     end
     
     it "should return the correct_value for :to_s relative to Note.new(a4, 3)" do
-      @note.to_s(@a43).should == "<c, e' fs>2"
+      @note.to_s(@a43).should == "<c, e' fs>8"
     end
     
     it "should return the correct_value for :to_s relative to Note.new(c3, 2)" do
-      @note.to_s(@c32).should == "<c' e' fs>2"
+      @note.to_s(@c32).should == "<c' e' fs>"
     end
   end
   
@@ -183,7 +183,7 @@ describe "Note" do
   end
   
   describe "validations" do
-    [[c4, "a3"], cs, "ok", [1,2], true, {1 => 2}].each do |pitches|
+    [["2", a4], cs, "ok", [1,2], true, {1 => 2}].each do |pitches|
       it "should raise an ArgumentError when created with #{pitches.inspect} as its pitches value" do
         lambda { Note.new(pitches, 4) }.should raise_error ArgumentError
       end
