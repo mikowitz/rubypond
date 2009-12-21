@@ -365,27 +365,27 @@ describe "Pitch" do
     c4.should < c5
   end
 
-  # describe "validations" do
-  #   [1, "ok", {1 => 2}, [1,2], true].each do |accidental|
-  #     it "should raise an ArgumentError when created with #{accidental.inspect} as its accidental" do
-  #       lambda { Pitch.new(accidental, 4) }.should raise_error ArgumentError
-  #     end
-  #   end
-  #   
-  #   [-1, 4.5, 128, "ok", false, [1,2], {1 => 2}].each do |midi_note|
-  #     it "should raise an ArgumentError when created with #{midi_note.inspect} as its midi value" do
-  #       lambda { Pitch.new(midi_note) }.should raise_error ArgumentError
-  #     end
-  #   end
-  #   
-  #   [-1, 0.5, 10, "ok", true, [1,2], {1 => 2}].each do |octave|
-  #     it "should raise an ArgumentError when created wtih #{octave.inspect} as its octave value" do
-  #       lambda { Pitch.new(c, octave) }.should raise_error ArgumentError
-  #     end
-  #   end
-  #   
-  #   it "should raise an error if the only argument is an accidental" do
-  #     lambda { Pitch.new(c) }.should raise_error ArgumentError
-  #   end
-  # end
+  describe "validations" do
+    [1, "ok", {1 => 2}, [1,2], true].each do |accidental|
+      it "should raise an ArgumentError when created with #{accidental.inspect} as its accidental" do
+        lambda { Pitch.new(accidental, 4) }.should raise_error ArgumentError
+      end
+    end
+    
+    [-1, 4.5, 128, "ok", false, [1,2], {1 => 2}].each do |midi_note|
+      it "should raise an ArgumentError when created with #{midi_note.inspect} as its midi value" do
+        lambda { Pitch.new(midi_note) }.should raise_error ArgumentError
+      end
+    end
+    
+    [-1, 0.5, 10, "ok", true, [1,2], {1 => 2}].each do |octave|
+      it "should raise an ArgumentError when created wtih #{octave.inspect} as its octave value" do
+        lambda { Pitch.new(c, octave) }.should raise_error ArgumentError
+      end
+    end
+    
+    it "should raise an error if the only argument is an accidental" do
+      lambda { Pitch.new(c) }.should raise_error ArgumentError
+    end
+  end
 end
