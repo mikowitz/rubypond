@@ -10,5 +10,12 @@ describe "Enumerable" do
       [1,2,3].map_with_index {|o, i| o * i }.should == [0,2,6]
     end
     
+    it "should return the correct value when referencing another element in the array" do
+      x = [1,2,3]
+      foo = x.map_with_index do |o, i|
+        o + (x[i + 1] || 0)
+      end
+      foo.should == [3,5,3]
+    end
   end
 end
