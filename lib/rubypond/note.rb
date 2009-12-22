@@ -52,12 +52,11 @@ module Rubypond
     # @param [Pitch] this_reference_pitch
     # @return [String] Lilypond
     def build_chord_string(this_reference_pitch)
-      temp_pitches, these_pitches = [this_reference_pitch] + pitches, []
-      temp_pitches.each_with_index do |pitch, index|
-        next if index.zero?
-        these_pitches << pitch.to_s(temp_pitches[index - 1])
+      temp_pitches = [this_reference_pitch] + pitches
+      temp_pitches.map_with_index! do |pitch, index|
+        begin temp_pitches[index + 1].to_s(pitch) rescue nil end
       end
-      "<#{these_pitches.join(" ")}>"
+      "<#{temp_pitches.compact.join(" ")}>"
     end
     
     ##
