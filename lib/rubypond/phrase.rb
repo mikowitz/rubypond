@@ -19,6 +19,16 @@ module Rubypond
     end
     
     ##
+    # Returns the <tt>Note</tt> any following object's Lilypond string
+    # is calculated relative to.
+    #
+    # @private
+    # @return [Note] reference_note
+    def reference_note
+      @contents.flatten.last
+    end
+
+    ##
     # Returns the Lilypond string representation
     # of the <tt>Phrase</tt>'s <tt>contents</tt> array.
     #
