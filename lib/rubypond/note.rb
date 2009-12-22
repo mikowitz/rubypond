@@ -84,6 +84,15 @@ module Rubypond
     alias :reference_duration :duration
     
     ##
+    # Determines equality of two notes based on pitch collection and duration
+    #
+    # @param [Note]
+    # @return [boolean]
+    def ==(note)
+      [self.pitches, self.duration] == [note.pitches, note.duration]
+    end
+
+    ##
     # Ensures that the <tt>pitches</tt> array contains only <tt>Pitch</tt> objects.
     #
     # @private

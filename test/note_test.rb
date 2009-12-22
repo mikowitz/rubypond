@@ -9,6 +9,13 @@ describe "Note" do
     @c32 = Note.new(c3, 2)
   end
 
+  it "should have a sense of equality" do
+    @c44.should == Note.new(c4, 4)
+    @c44.should_not == Note.new(c4, 3)
+    @cc4.should_not == Note.new(c5, 4)
+    Note.new([c4, e4, g4], 2).should == Note.new([c4, g4, e4], 2)
+  end
+
   describe "with a single pitch" do
     before do
       @note = Note.new(c4, 4)
