@@ -15,7 +15,7 @@ module Rubypond
     # @return [String] Lilypond
     def to_s(relative_note=Note.new(c4, 4))
       [
-        build_pitch_string(relative_note.reference_pitch),
+        build_pitches_string(relative_note.reference_pitch),
         build_duration_string(relative_note.reference_duration)
       ].join("")
     end
@@ -27,19 +27,39 @@ module Rubypond
     # @private
     # @param [Pitch] this_reference_pitch
     # @return [String] Lilypond
-    def build_pitch_string(this_reference_pitch)
+    def build_pitches_string(this_reference_pitch)
       if pitches.size == 1
-        pitches.first.to_s(this_reference_pitch)
+        build_single_pitch_string(this_reference_pitch)
       else
-        temp_pitches, these_pitches = [this_reference_pitch] + pitches, []
-        temp_pitches.each_with_index do |pitch, i|
-          next if i.zero?
-          these_pitches << pitch.to_s(temp_pitches[i - 1])
-        end
-        "<#{these_pitches.join(" ")}>"
+        build_chord_string(this_reference_pitch)
       end
     end
 
+    ##
+    # Constructs a Lilypond representation of a single pitch
+    #
+    # @private
+    # @param [Pitch] this_reference_pitch
+    # @return [String] Lilypond
+    def build_single_pitch_string(this_reference_pitch)
+      pitches.first.to_s(this_reference_pitch)
+    end
+
+    ##
+    # Constructs a Lilypond representation of a chord
+    #
+    # @private
+    # @param [Pitch] this_reference_pitch
+    # @return [String] Lilypond
+    def build_chord_string(this_reference_pitch)
+      temp_pitches, these_pitches = [this_reference_pitch] + pitches, []
+      temp_pitches.each_with_index do |pitch, index|
+        next if index.zero?
+        these_pitches << pitch.to_s(temp_pitches[index - 1])
+      end
+      "<#{these_pitches.join(" ")}>"
+    end
+    
     ##
     # Constructs a string representing the duration
     # of this <tt>Note</tt>.

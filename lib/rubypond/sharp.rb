@@ -46,5 +46,7 @@ module Rubypond
     def validate_accidental
       raise(ArgumentError, "Invalid sharp accidental: #{accidental}") unless accidental.is_a?(Accidental)
     end
+    
+    protected :validate_accidental
   end
 end
