@@ -71,7 +71,7 @@ rescue LoadError
   end
 end
 
-task :default => :test
+task :default => :wheel
 
 begin
   require 'yard'
