@@ -23,11 +23,15 @@ describe "Staff" do
     it "should have the correct short_instrument_name" do
       @staff.short_instrument_name.should == "Staff"
     end
-    
+
     it "should have the correct display_name" do
       @staff.display_name.should == "staff"
     end
-    
+
+    it "should have the correct score_segment" do
+      @staff.score_segment.should == "\\new Staff \\staff"
+    end
+
     it "should return the correct data for to_s" do
       @string = @staff.to_s
       @string.should =~ /staff\s\= \\relative c\' \{/
@@ -64,6 +68,10 @@ describe "Staff" do
     
     it "should have the correct display_name" do
       @staff.display_name.should == "violin"
+    end
+    
+    it "should have the correct score_segment" do
+      @staff.score_segment.should == "\\new Staff \\violin"
     end
     
     it "should return the correct data for to_s" do
@@ -104,6 +112,10 @@ describe "Staff" do
     it "should have the correct display_name" do
       @staff.display_name.should == "violaii"
     end
+
+    it "should have the correct score_segment" do
+      @staff.score_segment.should == "\\new Staff \\violaii"
+    end
     
     it "should return the correct data for to_s" do
       @string = @staff.to_s
@@ -141,6 +153,10 @@ describe "Staff" do
     
     it "should have the correct display_name" do
       @staff.display_name.should == "oboe"
+    end
+
+    it "should have the correct score_segment" do
+      @staff.score_segment.should == "\\new Staff \\oboe"
     end
     
     it "should return the correct data for to_s" do
