@@ -15,9 +15,9 @@ describe "Phrase" do
     end
     
     it "should have the correct size for :contents" do
-      @phrase.contents.size == 7
-      @phrase.contents.first == Note.new(c4, 4)
-      @phrase.contents.last == Note.new(bf4, 2)
+      @phrase.contents.size.should == 7
+      @phrase.contents.first.should == Note.new(c4, 4)
+      @phrase.contents.last.should == Note.new(bf4, 2)
     end
 
     it "should return the correct value for :reference_note" do
@@ -43,9 +43,9 @@ describe "Phrase" do
     end
 
     it "should have the correct size for :contents" do
-      @phrase.contents.size == 7
-      @phrase.contents.first == Note.new(c4, 4)
-      @phrase.contents.last == Note.new(bf4, 2)
+      @phrase.contents.size.should == 7
+      @phrase.contents.first.should == Note.new(c4, 4)
+      @phrase.contents.last.should == Note.new(bf4, 2)
     end
 
     it "should return the correct value for :reference_note" do
@@ -73,13 +73,40 @@ describe "Phrase" do
     end
 
     it "should have the correct size for :contents" do
-      @phrase.contents.size == 21
-      @phrase.contents.first == Note.new(c4, 4)
-      @phrase.contents.last == Note.new(bf4, 4)
+      @phrase.contents.size.should == 21
+      @phrase.contents.first.should == Note.new(c4, 4)
+      @phrase.contents.last.should == Note.new(bf4, 2)
+    end
+
+    it "should return the correct value for :reference_note" do
+      @phrase.reference_note.should == Note.new(bf4, 2)
     end
     
     it "should return the correct value for :to_s" do
       @phrase.to_s.should == "c d8 ef16 fs d'8. c, bf'8 c,4 d8 ef16 fs d'8. c, bf'8\nc,4 d8 ef16 fs d'8. c, bf'8"
+    end
+  end
+  
+  describe "a short, modularly constructed phrase" do
+    before do
+      @phrase = Phrase.new
+      @phrase.n(c4, 4)
+      @phrase.n(d4, 2)
+      @phrase.n(e5, 2)
+    end
+    
+    it "should have the correct size for :contents" do
+      @phrase.contents.size.should == 3
+      @phrase.contents.first.should == Note.new(c4, 4)
+      @phrase.contents.last.should == Note.new(e5, 2)
+    end
+    
+    it "should return the correct value for :reference_note" do
+      @phrase.reference_note.should == Note.new(e5, 2)
+    end
+    
+    it "should return the correct value for :to_s" do
+      @phrase.to_s.should == "c d8 e'"
     end
   end
 end
