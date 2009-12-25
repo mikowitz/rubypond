@@ -2,6 +2,7 @@
 :oboe:
   :instrument_name: Oboe
   :short_instrument_name: Ob.
+  :class_name: Oboe
   :display_name: oboe
   :relative_c: c4
   :clef: treble

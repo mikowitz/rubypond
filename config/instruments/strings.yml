@@ -2,24 +2,28 @@
 :violin:
   :instrument_name: Violin
   :short_instrument_name: Vln
+  :class_name: Violin
   :display_name: violin
   :relative_c: c4
   :clef: treble
 :viola:
   :instrument_name: Viola
   :short_instrument_name: Vla
+  :class_name: Viola
   :display_name: viola
   :relative_c: c4
   :clef: alto
 :violoncello:
   :instrument_name: Violoncello
   :short_instrument_name: Vlc.
+  :class_name: Violoncello
   :display_name: violoncello
   :relative_c: c3
   :clef: bass
 :contrabass:
   :instrument_name: Contrabass
   :short_instrument_name: Cb.
+  :class_name: Contrabass
   :display_name: contrabass
   :relative_c: c2
   :clef: bass
