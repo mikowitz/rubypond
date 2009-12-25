@@ -41,6 +41,14 @@ module Rubypond
   def self.version
     File.open(File.join(File.dirname(__FILE__), "..", "VERSION"), "r").readline.strip
   end
+
+  INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
+    eval <<-RUBY
+      # @private
+      class #{klass_name} < Staff
+      end
+    RUBY
+  end
 end
 
 # @private
