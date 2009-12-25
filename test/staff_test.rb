@@ -24,8 +24,8 @@ describe "Staff" do
       @staff.short_instrument_name.should == "Staff"
     end
     
-    it "should have the correct lilypond_display_name" do
-      @staff.lilypond_display_name.should == "staff"
+    it "should have the correct display_name" do
+      @staff.display_name.should == "staff"
     end
     
     it "should return the correct data for to_s" do
@@ -62,13 +62,13 @@ describe "Staff" do
       @staff.short_instrument_name.should == "Vln"
     end
     
-    it "should have the correct lilypond_display_name" do
-      @staff.lilypond_display_name.should == "violin"
+    it "should have the correct display_name" do
+      @staff.display_name.should == "violin"
     end
     
     it "should return the correct data for to_s" do
       @string = @staff.to_s
-      @string.should =~ /staff\s\= \\relative c\' \{/
+      @string.should =~ /violin \= \\relative c\' \{/
       @string.should =~ /\\set Staff\.instrumentName = \"Violin\"/
       @string.should =~ /\\set Staff\.shortInstrumentName = \"Vln\"/
       @string.should =~ /\\clef treble/
@@ -80,7 +80,7 @@ describe "Staff" do
     before do
       @staff = Viola.new "II" do
         4.times do
-          [c3 d3].each do |note|
+          [c3, d3].each do |note|
             n note, 4
           end
         end
@@ -94,24 +94,62 @@ describe "Staff" do
     end
     
     it "should have the correct instrument_name" do
-      @staff.instrument_name.should == "Violin II"
+      @staff.instrument_name.should == "Viola II"
     end
     
     it "should have the correct short_instrument_name" do
-      @staff.short_instrument_name.should == "Vln II"
+      @staff.short_instrument_name.should == "Vla II"
     end
     
-    it "should have the correct lilypond_display_name" do
-      @staff.lilypond_display_name.should == "violinii"
+    it "should have the correct display_name" do
+      @staff.display_name.should == "violaii"
     end
     
     it "should return the correct data for to_s" do
       @string = @staff.to_s
-      @string.should =~ /staff\s\= \\relative c \{/
+      @string.should =~ /violaii \= \\relative c' \{/
       @string.should =~ /\\set Staff\.instrumentName = \"Viola II\"/
       @string.should =~ /\\set Staff\.shortInstrumentName = \"Vla II\"/
       @string.should =~ /\\clef alto/
-      @string.should =~ /c d c d c d c d/
+      @string.should =~ /c, d c d c d c d/
+    end
+  end
+  
+  describe "a simple, modularly construted oboe part" do
+    before do
+      @staff = Oboe.new
+      4.times do
+        [c4, g4].each do |note|
+          @staff.n(note, 4)
+        end
+      end
+    end
+    
+    it "should contain the correct contents" do
+      @staff.contents.size.should == 8
+      @staff.contents.first.should == Note.new(c4, 4)
+      @staff.contents.last.should == Note.new(g4, 4)
+    end
+    
+    it "should have the correct instrument_name" do
+      @staff.instrument_name.should == "Oboe"
+    end
+    
+    it "should have the correct short_instrument_name" do
+      @staff.short_instrument_name.should == "Ob."
+    end
+    
+    it "should have the correct display_name" do
+      @staff.display_name.should == "oboe"
+    end
+    
+    it "should return the correct data for to_s" do
+      @string = @staff.to_s
+      @string.should =~ /oboe \= \\relative c' \{/
+      @string.should =~ /\\set Staff\.instrumentName = \"Oboe\"/
+      @string.should =~ /\\set Staff\.shortInstrumentName = \"Ob.\"/
+      @string.should =~ /\\clef treble/
+      @string.should =~ /c g' c, g' c, g' c, g'/
     end
   end
 end
