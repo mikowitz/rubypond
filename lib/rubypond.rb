@@ -2,9 +2,21 @@ $:.unshift File.dirname(__FILE__)
 $:.unshift File.join File.dirname(__FILE__), "rubypond"
 
 require 'introitus'
-%w{ accidental flat natural note phrase pitch sharp }.each {|file| require file }
+%w{ accidental flat natural note phrase pitch sharp staff }.each {|file| require file }
 
 module Rubypond
+  # @private
+  STRINGS = YAML.load(File.open(File.dirname(__FILE__) + "/../config/instruments/strings.yml", "r"))
+  # @private
+  WOODWINDS = YAML.load(File.open(File.dirname(__FILE__) + "/../config/instruments/woodwinds.yml", "r"))
+  # @private
+  BRASS = YAML.load(File.open(File.dirname(__FILE__) + "/../config/instruments/brass.yml", "r"))
+
+  ##
+  # A hash of instrument properties: instrument_name, short_instrument_name, display_name, relative_c, and clef.
+  INSTRUMENTS = BRASS.merge(STRINGS).merge(WOODWINDS)
+  INSTRUMENTS.default = YAML.load(File.open(File.dirname(__FILE__) + "/../config/default_staff_values.yml", "r"))[:default_staff]
+
   ##
   # Returns the Lilypond representation of a duration lasting
   # <tt>duration</tt> sixteenth notes.

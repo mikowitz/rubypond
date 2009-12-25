@@ -53,7 +53,7 @@ describe "Rubypond" do
     
     describe "\b[:cello]" do
       before do
-        @hash = Rubypond::INSTRUMENTS[:cello]
+        @hash = Rubypond::INSTRUMENTS[:violoncello]
       end
 
       it "should return the correct value for :instrument_name" do
@@ -64,6 +64,50 @@ describe "Rubypond" do
       end
       it "should return the correct value for :display_name" do
         @hash[:display_name].should == "violoncello"
+      end
+      it "should return the correct value for :clef" do
+        @hash[:clef].should == "bass"
+      end
+      it "should return the correct value for :relative_c" do
+        @hash[:relative_c].should == "c3"
+      end      
+    end
+    
+    describe "\b[:oboe]" do
+      before do
+        @hash = Rubypond::INSTRUMENTS[:oboe]
+      end
+
+      it "should return the correct value for :instrument_name" do
+        @hash[:instrument_name].should == "Oboe"
+      end
+      it "should return the correct value for :short_instrument_name" do
+        @hash[:short_instrument_name].should == "Ob."
+      end
+      it "should return the correct value for :display_name" do
+        @hash[:display_name].should == "oboe"
+      end
+      it "should return the correct value for :clef" do
+        @hash[:clef].should == "treble"
+      end
+      it "should return the correct value for :relative_c" do
+        @hash[:relative_c].should == "c4"
+      end      
+    end
+    
+    describe "\b[:trombone]" do
+      before do
+        @hash = Rubypond::INSTRUMENTS[:trombone]
+      end
+
+      it "should return the correct value for :instrument_name" do
+        @hash[:instrument_name].should == "Trombone"
+      end
+      it "should return the correct value for :short_instrument_name" do
+        @hash[:short_instrument_name].should == "Tbn."
+      end
+      it "should return the correct value for :display_name" do
+        @hash[:display_name].should == "trombone"
       end
       it "should return the correct value for :clef" do
         @hash[:clef].should == "bass"
