@@ -22,14 +22,13 @@ describe "Rest" do
     end
 
     it "should return the correct values with a reference note whose duration is 2" do
-      @r2.to_s(@ref1).should == "r"
-      @r4.to_s(@ref1).should == "r4"
+      @r2.to_s(@ref2).should == "r"
+      @r4.to_s(@ref2).should == "r4"
     end
     
     it "should create a value for the rest's :reference_note field" do
-      @r2.reference_note.should be_nil
       @r2.to_s(@ref2)
-      @r2.reference_note.should == Note.new(c4, 4)
+      @r2.reference_note.should == Note.new(c4, 2)
     end
   end
   
