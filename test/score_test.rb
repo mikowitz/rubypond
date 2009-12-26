@@ -28,8 +28,9 @@ describe "Score" do
 
   describe "with one part" do
     before do
+      violin = @violin
       @s = Score.new do
-        part @violin
+        part violin
       end
     end
     
@@ -47,7 +48,7 @@ describe "Score" do
       end
       
       it "should have the lilypond version line" do
-        @str.should =~ /\\version \"#{Rubypond.version}\"/
+        @str.should =~ /\\version \"#{Rubypond.lilypond_version}\"/
       end
       
       it "should have a part block for each part" do
@@ -63,9 +64,10 @@ describe "Score" do
 
   describe "with two parts" do
     before do
+      violin, viola = @violin, @viola
       @s = Score.new "My Test" do
-        part @violin
-        part @viola
+        part violin
+        part viola
       end
     end
     
@@ -94,10 +96,11 @@ describe "Score" do
 
   describe "with three parts" do
     before do
+      violin, viola, cello = @violin, @viola, @cello
       @s = Score.new "Full Score" do
-        part @violin
-        part @viola
-        part @cello
+        part violin
+        part viola
+        part cello
       end
     end
     
@@ -121,6 +124,22 @@ describe "Score" do
         @str.should =~ /\\new Staff \\violin/
         @str.should =~ /\\new Staff \\viola/
         @str.should =~ /\\new Staff \\violoncello/
+      end
+
+      describe "calling :build" do
+        before do
+          @s.build
+        end
+
+        after do
+          # File.delete("full_score.ly") if File.exists?("full_score.ly")
+          # File.delete("full_score.pdf") if File.exists?("full_score.pdf")
+        end
+
+        it "should generate the proper .ly and .pdf files" do
+          File.exists?("full_score.ly").should be
+          File.exists?("full_score.pdf").should be
+        end
       end
     end
   end
