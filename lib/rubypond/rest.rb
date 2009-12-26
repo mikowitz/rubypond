@@ -29,6 +29,10 @@ module Rubypond
       Rubypond.duration(duration)
     end
     
+    def ==(rest)
+      self.duration == rest.duration
+    end
+
     ##
     # Ensures that the <tt>duration</tt> is a valid duration (for now, the smallest allowed duration is 1/128)
     #
