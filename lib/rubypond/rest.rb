@@ -10,6 +10,11 @@ module Rubypond
       self.validate
     end
     
+    ##
+    # Returns a Lilypond representation of this <tt>Rest</tt>,
+    # with a duration relative to the previous object.
+    #
+    # @return [String] Lilypond
     def to_s(relative_note=Note.new(c4, 4))
       @reference_note = relative_note
       [ "r",
@@ -17,6 +22,8 @@ module Rubypond
       ].join("")
     end
     
+    # @private
+    # @return [String]
     def build_duration_string(this_reference_duration)
       return "" if duration == this_reference_duration
       Rubypond.duration(duration)
