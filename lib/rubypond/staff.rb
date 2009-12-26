@@ -77,8 +77,8 @@ module Rubypond
     #
     # @private
     # @return [String] Lilypond
-    def staff_contents(reference_note=nil)
-      ref_note = reference_note || relative_c_note
+    def staff_contents(this_reference_note=nil)
+      ref_note = Note.new(relative_c_note.pitches, (reference_note || relative_c_note).duration)
       temp_objects = [ref_note] + @contents
       temp_objects.map_with_index! do |object, index|
         begin temp_objects[index + 1].to_s(object) rescue nil end
@@ -86,6 +86,21 @@ module Rubypond
       temp_objects.to_strings_of_length.join("\n")
     end
     
+    # @private
+    def contents_reference_note(this_reference_note=nil)
+      Note.new(contents_reference_note_pitch, contents_reference_note_duration(this_reference_note))
+    end
+
+    # @private
+    def contents_reference_note_pitch
+      relative_c_note.pitches
+    end
+
+    # @private
+    def contents_reference_note_duration(this_reference_note=nil)
+      (this_reference_note || relative_c_note).duration
+    end
+
     # @private
     def reference_note
       contents.last.reference_note
