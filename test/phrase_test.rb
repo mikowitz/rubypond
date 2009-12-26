@@ -19,13 +19,41 @@ describe "Phrase" do
       @phrase.contents.first.should == Note.new(c4, 4)
       @phrase.contents.last.should == Note.new(bf4, 2)
     end
-
+  
     it "should return the correct value for :reference_note" do
       @phrase.reference_note.should == Note.new(bf4, 2)
     end
     
     it "should return the correct value for :to_s" do
       @phrase.to_s.should == "c d8 ef16 fs d'8. c, bf'8"
+    end
+  end
+
+  describe "a short, simple phrase with rests" do
+    before do
+      @phrase = Phrase.new do
+        n c4, 4
+        n d4, 2
+        n ef4, 1
+        r 1
+        n d5, 3
+        n c4, 3
+        r 2
+      end
+    end
+    
+    it "should have the correct size for :contents" do
+      @phrase.contents.size.should == 7
+      @phrase.contents.first.should == Note.new(c4, 4)
+      @phrase.contents.last.should == Rest.new(2)
+    end
+
+    it "should return the correct value for :reference_note" do
+      @phrase.reference_note.should == Note.new(c4, 2)
+    end
+    
+    it "should return the correct value for :to_s" do
+      @phrase.to_s.should == "c d8 ef16 r d'8. c, r8"
     end
   end
 
@@ -41,17 +69,17 @@ describe "Phrase" do
         n bf4, 2
       end
     end
-
+  
     it "should have the correct size for :contents" do
       @phrase.contents.size.should == 7
       @phrase.contents.first.should == Note.new(c4, 4)
       @phrase.contents.last.should == Note.new(bf4, 2)
     end
-
+  
     it "should return the correct value for :reference_note" do
       @phrase.reference_note.should == Note.new(bf4, 2)
     end
-
+  
     it "should return the correct value for :to_s" do
       @phrase.to_s.should == "c d8 ef16 <fs a g'> d'8. c, bf'8"
     end
@@ -71,13 +99,13 @@ describe "Phrase" do
         }
       end
     end
-
+  
     it "should have the correct size for :contents" do
       @phrase.contents.size.should == 21
       @phrase.contents.first.should == Note.new(c4, 4)
       @phrase.contents.last.should == Note.new(bf4, 2)
     end
-
+  
     it "should return the correct value for :reference_note" do
       @phrase.reference_note.should == Note.new(bf4, 2)
     end

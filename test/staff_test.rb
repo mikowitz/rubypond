@@ -41,7 +41,49 @@ describe "Staff" do
       @string.should =~ /c d e f g a b c/
     end
   end
-  
+
+  describe "a simple violin staff with rests" do
+    before do
+      @staff = Oboe.new do
+        n c4, 4
+        r 3
+        n d4, 1
+        n c4, 2
+        r 2
+      end
+    end
+    
+    it "should contain the correct contents" do
+      @staff.contents.size.should == 5
+      @staff.contents.first.should == Note.new(c4, 4)
+      @staff.contents.last.should == Rest.new(2)
+    end
+    
+    it "should have the correct instrument_name" do
+      @staff.instrument_name.should == "Oboe"
+    end
+    
+    it "should have the correct short_instrument_name" do
+      @staff.short_instrument_name.should == "Ob."
+    end
+
+    it "should have the correct display_name" do
+      @staff.display_name.should == "oboe"
+    end
+
+    it "should have the correct score_segment" do
+      @staff.score_segment.should == "\\new Staff \\oboe"
+    end
+
+    it "should return the correct data for to_s" do
+      @string = @staff.to_s
+      @string.should =~ /oboe\s\= \\relative c\' \{/
+      @string.should =~ /\\set Staff\.instrumentName = \"Oboe\"/
+      @string.should =~ /\\set Staff\.shortInstrumentName = \"Ob.\"/
+      @string.should =~ /\\clef treble/
+      @string.should =~ /c r8. d16 c8 r/
+    end
+  end  
   
   describe "a simple, violin staff" do
     before do
