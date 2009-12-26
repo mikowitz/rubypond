@@ -17,12 +17,12 @@ module Rubypond
     # of the <tt>Staff</tt>'s <tt>contents</tt> array.
     #
     # @return [String] Lilypond
-    def to_s
-      [ staff_name_relative_opening,
+    def to_s(reference_note=nil)
+      [ staff_name_relative_opening_tag,
         staff_instrument_names,
         staff_clef,
-        staff_contents,
-        staff_closing
+        staff_contents(reference_note),
+        staff_closing_tag
       ].join("\n")
     end
 
@@ -43,7 +43,7 @@ module Rubypond
     #   staff_name_relative_opening #=> "violin = \relative c' {"
     # @private
     # @return [String] Lilypond
-    def staff_name_relative_opening
+    def staff_name_relative_opening_tag
       [display_name, "=", relative_c_string, "{"].join(" ")
     end
 
@@ -77,14 +77,20 @@ module Rubypond
     #
     # @private
     # @return [String] Lilypond
-    def staff_contents
-      temp_objects = [relative_c_note] + @contents
+    def staff_contents(reference_note=nil)
+      ref_note = reference_note || relative_c_note
+      temp_objects = [ref_note] + @contents
       temp_objects.map_with_index! do |object, index|
         begin temp_objects[index + 1].to_s(object) rescue nil end
       end
       temp_objects.to_strings_of_length.join("\n")
     end
     
+    # @private
+    def reference_note
+      contents.last.reference_note
+    end
+
     ##
     # Returns the <tt>Rubypond</tt> <tt>Note</tt> object
     # that corresponds to the <tt>Staff</tt>'s <tt>relative_c</tt> string.
@@ -115,7 +121,7 @@ module Rubypond
     #
     # @private
     # @return [String]
-    def staff_closing; "}"; end
+    def staff_closing_tag; "}"; end
     
     ##
     # The staff's instrument name, joined with the name_extra.

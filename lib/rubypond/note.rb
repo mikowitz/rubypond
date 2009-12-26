@@ -81,6 +81,16 @@ module Rubypond
       pitches.first
     end
     
+    ##
+    # The reference note this <tt>Note</tt>
+    # passes to the next object. Is equivalent to <tt>self</tt>.
+    #
+    # @private
+    # @return [Note]
+    def reference_note
+      self
+    end
+
     alias :reference_duration :duration
     
     ##
