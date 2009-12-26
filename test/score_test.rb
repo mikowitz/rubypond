@@ -132,8 +132,8 @@ describe "Score" do
         end
 
         after do
-          # File.delete("full_score.ly") if File.exists?("full_score.ly")
-          # File.delete("full_score.pdf") if File.exists?("full_score.pdf")
+          File.delete("full_score.ly") if File.exists?("full_score.ly")
+          File.delete("full_score.pdf") if File.exists?("full_score.pdf")
         end
 
         it "should generate the proper .ly and .pdf files" do
