@@ -2,7 +2,7 @@ $:.unshift File.dirname(__FILE__)
 $:.unshift File.join File.dirname(__FILE__), "rubypond"
 
 require 'introitus'
-%w{ accidental flat natural note phrase pitch sharp staff }.each {|file| require file }
+%w{ accidental flat natural note phrase pitch score sharp staff }.each {|file| require file }
 
 module Rubypond
   # @private
@@ -40,6 +40,10 @@ module Rubypond
   # @return [String]
   def self.version
     File.open(File.join(File.dirname(__FILE__), "..", "VERSION"), "r").readline.strip
+  end
+
+  def self.lilypond_version
+    `lilypond --version`.match(/([\d\.]+)/)[0]
   end
 
   INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
