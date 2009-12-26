@@ -35,6 +35,11 @@ module Rubypond
     def n(*args)
       @contents << Note.new(*args)
     end
+    
+    # @private
+    def r(*args)
+      @contents << Rest.new(*args)
+    end
 
     ##
     # The first line of the <tt>Staff</tt>'s Lilypond representation.
@@ -81,7 +86,7 @@ module Rubypond
       ref_note = Note.new(relative_c_note.pitches, (reference_note || relative_c_note).duration)
       temp_objects = [ref_note] + @contents
       temp_objects.map_with_index! do |object, index|
-        begin temp_objects[index + 1].to_s(object) rescue nil end
+        begin temp_objects[index + 1].to_s(object.reference_note) rescue nil end
       end
       temp_objects.to_strings_of_length.join("\n")
     end
