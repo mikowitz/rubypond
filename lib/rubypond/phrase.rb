@@ -44,7 +44,7 @@ module Rubypond
       temp_objects.map_with_index! do |object, index|
         begin temp_objects[index + 1].to_s(object.reference_note) rescue nil end
       end
-      temp_objects.to_strings_of_length.join("\n")
+      temp_objects.compact.to_strings_of_length.join("\n")
     end
   end
 end

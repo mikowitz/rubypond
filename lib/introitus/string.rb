@@ -6,6 +6,6 @@ class String
   #   "a_snake_cased_method_name".camel_case #=> "aSnakeCasedMethodName"
   # @return [String]
   def camel_case
-    self.gsub(/\_\w/) {|sub| sub.gsub("_", "").upcase}
+    self.gsub(/\_\w/) {|sub| sub[1].chr.upcase}
   end
 end

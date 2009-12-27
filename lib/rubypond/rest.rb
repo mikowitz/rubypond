@@ -29,6 +29,7 @@ module Rubypond
       Rubypond.duration(duration)
     end
     
+    # @private
     def ==(rest)
       self.duration == rest.duration
     end

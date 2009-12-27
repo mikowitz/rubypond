@@ -38,9 +38,19 @@ module Rubypond
     ##
     # Generates a .ly file and compiles that into a .pdf
     def build
-      File.open(filename, "w") do |f|
-        f << self.to_s
+      write_ly_file
+      compile_pdf
+    end
+    
+    # @private
+    def write_ly_file
+      File.open(filename, "w") do |file|
+        file << self.to_s
       end
+    end
+    
+    # @private
+    def compile_pdf
       system("lilypond #{filename}")
     end
 

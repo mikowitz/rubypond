@@ -96,6 +96,7 @@ module Rubypond
     ##
     # Determines equality of two notes based on pitch collection and duration
     #
+    # @private
     # @param [Note]
     # @return [boolean]
     def ==(note)
