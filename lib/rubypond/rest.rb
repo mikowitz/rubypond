@@ -1,7 +1,7 @@
 module Rubypond
   class Rest
     attr_validate :duration
-
+    
     # @private
     attr_accessor :reference_note
     
@@ -17,7 +17,7 @@ module Rubypond
     # @return [String] Lilypond
     def to_s(relative_note=Note.new(c4, 4))
       @reference_note = relative_note
-      [ "r",
+      [ rest_notation_char,
         build_duration_string(relative_note.duration)
       ].join("")
     end
@@ -28,6 +28,9 @@ module Rubypond
       return "" if duration == this_reference_duration
       Rubypond.duration(duration)
     end
+    
+    # @private
+    def rest_notation_char; "r"; end
     
     # @private
     def ==(rest)
@@ -42,5 +45,20 @@ module Rubypond
     def validate_duration
       raise(ArgumentError, "Invalid note duration: #{duration.inspect}") unless duration.is_a?(Numeric) && duration > 0 && (duration % 0.125).zero?
     end
+  end
+
+
+  ##
+  # In Lilypond, in addition to the regular notated rest, there is
+  # a cammond for an invisible rest that leaves a space in the score, but no
+  # notation.
+  # 
+  # @example
+  #   InvisibleRest.new(4) #=> "s4"
+  class InvisibleRest < Rest
+    attr_validate :duration
+    
+    # @private
+    def rest_notation_char; "s"; end
   end
 end
