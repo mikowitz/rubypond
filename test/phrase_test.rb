@@ -33,7 +33,7 @@ describe "Phrase" do
     before do
       @phrase = Phrase.new do
         n c4, 4
-        n d4, 2
+        s 2
         n ef4, 1
         r 1
         n d5, 3
@@ -53,7 +53,7 @@ describe "Phrase" do
     end
     
     it "should return the correct value for :to_s" do
-      @phrase.to_s.should == "c d8 ef16 r d'8. c, r8"
+      @phrase.to_s.should == "c s8 ef16 r d'8. c, r8"
     end
   end
 

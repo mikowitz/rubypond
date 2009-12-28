@@ -48,13 +48,14 @@ describe "Staff" do
         n c4, 4
         r 3
         n d4, 1
-        n c4, 2
+        s 1
+        n c4, 1
         r 2
       end
     end
     
     it "should contain the correct contents" do
-      @staff.contents.size.should == 5
+      @staff.contents.size.should == 6
       @staff.contents.first.should == Note.new(c4, 4)
       @staff.contents.last.should == Rest.new(2)
     end
@@ -81,7 +82,7 @@ describe "Staff" do
       @string.should =~ /\\set Staff\.instrumentName = \"Oboe\"/
       @string.should =~ /\\set Staff\.shortInstrumentName = \"Ob.\"/
       @string.should =~ /\\clef treble/
-      @string.should =~ /c r8. d16 c8 r/
+      @string.should =~ /c r8. d16 s c r8/
     end
   end  
   
