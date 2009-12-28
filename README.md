@@ -2,10 +2,15 @@
 
 Ruby wrapper for the [Lilypond](http://www.lilypond.org/ "Lilypond") formatting language.
 
-# Usage
+## Usage
 
+### Including Rubypond in your project
 
-# Note on Patches/Pull Requests
+`require 'rubygems'`<br />
+`require 'rubypond'`<br />
+`include Rubypond`
+
+## Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -17,6 +22,6 @@ Ruby wrapper for the [Lilypond](http://www.lilypond.org/ "Lilypond") formatting 
 * Send me a pull request. Bonus points for topic branches.
 
 
-# Copyright
+## Copyright
 
 Copyright (c) 2009 Michael Berkowitz. See LICENSE for details.
