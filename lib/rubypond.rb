@@ -2,7 +2,7 @@ $:.unshift File.dirname(__FILE__)
 $:.unshift File.join File.dirname(__FILE__), "rubypond"
 
 require 'introitus'
-%w{ accidental flat natural note phrase pitch rest score sharp staff }.each {|file| require file }
+%w{ score_object accidental flat natural note phrase pitch rest score sharp staff }.each {|file| require file }
 
 module Rubypond
   # @private

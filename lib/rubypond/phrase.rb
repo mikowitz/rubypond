@@ -1,26 +1,13 @@
 module Rubypond
   class Phrase
+    include ScoreObject
+
     # @private
     attr_accessor :contents
     
     def initialize &block
       @contents = []
       instance_eval(&block) if block_given?
-    end
-    
-    ##
-    # Adds a <tt>Note</tt> with <tt>*args</tt> arguments
-    # to the <tt>Phrase</tt>'s <tt>contents</tt> array.
-    #
-    # @private
-    # @param [Pitch, Fixnum]
-    def n(*args)
-      @contents << Note.new(*args)
-    end
-
-    # @private
-    def r(*args)
-      @contents << Rest.new(*args)
     end
     
     ##

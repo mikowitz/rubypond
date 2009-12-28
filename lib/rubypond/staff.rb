@@ -1,5 +1,7 @@
 module Rubypond
   class Staff
+    include ScoreObject
+
     # @private
     attr_accessor :contents, :instrument
     ##
@@ -24,21 +26,6 @@ module Rubypond
         staff_contents(reference_note),
         staff_closing_tag
       ].join("\n")
-    end
-
-    ##
-    # Adds a <tt>Note</tt> with <tt>*args</tt> arguments
-    # to the <tt>Staff</tt>'s <tt>contents</tt> array.
-    #
-    # @private
-    # @param [Pitch, Fixnum]
-    def n(*args)
-      @contents << Note.new(*args)
-    end
-    
-    # @private
-    def r(*args)
-      @contents << Rest.new(*args)
     end
 
     ##
