@@ -1,8 +1,11 @@
-= rubypond
+# rubypond
 
-Description goes here.
+Ruby wrapper for the [Lilypond](http://www.lilypond.org/ "Lilypond") formatting language.
 
-== Note on Patches/Pull Requests
+# Usage
+
+
+# Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -13,6 +16,7 @@ Description goes here.
    bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+
+# Copyright
 
 Copyright (c) 2009 Michael Berkowitz. See LICENSE for details.
