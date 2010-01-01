@@ -45,13 +45,14 @@ module Rubypond
     def validate_duration
       raise(ArgumentError, "Invalid note duration: #{duration.inspect}") unless duration.is_a?(Numeric) && duration > 0 && (duration % 0.125).zero?
     end
+    
+    protected :validate_duration
   end
-
 
   ##
   # In Lilypond, in addition to the regular notated rest, there is
-  # a cammond for an invisible rest that leaves a space in the score, but no
-  # notation.
+  # a command for an invisible rest that leaves a space in the score, but no
+  # visible notation.
   # 
   # @example
   #   InvisibleRest.new(4) #=> "s4"

@@ -94,5 +94,7 @@ module Rubypond
     def validate_octave
       raise(ArgumentError, "Invalid pitch octave: #{octave}") if octave && (!octave.is_a?(Fixnum) || !octave.between?(0, 9))
     end
+    
+    protected :validate_accidental, :validate_octave
   end
 end

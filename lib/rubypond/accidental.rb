@@ -2,6 +2,7 @@ module Rubypond
   class Accidental
     include Comparable
     
+    # @private
     ACCIDENTAL_NAMES = %w{ c cs d ef e f fs g af a bf b }
   
     ##

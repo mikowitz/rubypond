@@ -120,5 +120,7 @@ module Rubypond
     def validate_duration
       raise(ArgumentError, "Invalid note duration: #{duration.inspect}") unless duration.is_a?(Numeric) && duration > 0 && (duration % 0.125).zero?
     end
+    
+    protected :validate_pitches, :validate_duration
   end
 end
