@@ -1,5 +1,35 @@
 require File.dirname(__FILE__) + "/test_helper"
 
+describe "Duplet" do
+  describe "a new duplet" do
+    before do
+      @d = Duplet.new do
+        [c4, d4].each do |pitch|
+          n pitch, 2
+        end
+      end
+    end
+    
+    it "should return the correct value for :fraction" do
+      @d.fraction.should == "3/2"
+    end
+    
+    it "should return the correct value for :contents" do
+      @d.contents.size.should == 2
+      @d.contents.first.should == Note.new(c4, 2)
+      @d.contents.last.should == Note.new(d4, 2)
+    end
+    
+    it "should return the correct value for :reference_duration" do
+      @d.reference_note.should == Note.new(d4, 2)
+    end
+    
+    it "should return the correct value for :to_s" do
+      @d.to_s.should == "\\times 3/2 { c8 d }"
+    end    
+  end
+end
+
 describe "Triplet" do
   describe "a new triplet" do
     before do
@@ -38,21 +68,21 @@ describe "Quintuplet" do
     end
     
     it "should return the correct value for :fraction" do
-      @t.fraction.should == "4/5"
+      @q.fraction.should == "4/5"
     end
     
     it "should return the correct value for :contents" do
-      @t.contents.size.should == 4
-      @t.contents.first.should == Note.new(c4, 1)
-      @t.contents.last.should == Note.new(f4, 2)
+      @q.contents.size.should == 4
+      @q.contents.first.should == Note.new(c4, 1)
+      @q.contents.last.should == Note.new(f4, 2)
     end
     
     it "should return the correct value for :reference_duration" do
-      @t.reference_note.should == Note.new(f4, 2)
+      @q.reference_note.should == Note.new(f4, 2)
     end
     
     it "should return the correct value for :to_s" do
-      @t.to_s.should == "\\times 4/5 { c16 d e f8 }"
+      @q.to_s.should == "\\times 4/5 { c16 d e f8 }"
     end    
   end
 end
