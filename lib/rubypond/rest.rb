@@ -16,7 +16,7 @@ module Rubypond
     #
     # @return [String] Lilypond
     def to_s(relative_note=Note.new(c4, 4))
-      @reference_note = relative_note
+      @reference_note = Note.new(relative_note.pitches, duration)
       [ rest_notation_char,
         build_duration_string(relative_note.duration)
       ].join("")

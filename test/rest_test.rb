@@ -69,7 +69,7 @@ describe "InvisibleRest" do
 
     it "should create a value for the rest's :reference_note field" do
       @s3.to_s(@ref2)
-      @s3.reference_note.should == Note.new(c4, 16)
+      @s3.reference_note.should == Note.new(c4, 3)
     end
   end
 
