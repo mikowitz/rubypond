@@ -3,7 +3,7 @@ $:.unshift File.join File.dirname(__FILE__), "rubypond"
 $:.unshift File.join File.dirname(__FILE__), "seeds"
 
 require 'introitus'
-%w{ score_object accidental flat natural note phrase pitch rest score sharp staff }.each {|file| require file }
+%w{ score_object accidental flat natural note phrase pitch rest score sharp staff tuplet }.each {|file| require file }
 
 module Rubypond
   ##
@@ -40,7 +40,7 @@ module Rubypond
   #
   # @private
   def self.instrument_default_staff_values
-    @@instrument_default_staff_values ||= Rubypond.load_config_file("default_staff_values.yml")
+    @@instrument_default_staff_values ||= Rubypond.load_config_file("default_staff_values.yml")[:default_staff]
   end
 
   ##
