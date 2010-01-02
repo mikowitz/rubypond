@@ -17,7 +17,7 @@ module Rubypond
     # @private
     # @return [Note] reference_note
     def reference_note
-      @contents.flatten.last
+      @contents.flatten.last.reference_note
     end
 
     ##
