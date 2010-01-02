@@ -36,6 +36,14 @@ module Rubypond
   end
 
   ##
+  # The default values for a generic <tt>Staff</tt> object.
+  #
+  # @private
+  def self.instrument_default_staff_values
+    @@instrument_default_staff_values ||= Rubypond.load_config_file("default_staff_values.yml")
+  end
+
+  ##
   # Returns the Lilypond representation of a duration lasting
   # <tt>duration</tt> sixteenth notes.
   #
@@ -59,7 +67,7 @@ module Rubypond
   ##
   # A hash of instrument properties: instrument_name, short_instrument_name, display_name, relative_c, and clef.
   INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS)
-  INSTRUMENTS.default = YAML.load(File.open(File.dirname(__FILE__) + "/../config/default_staff_values.yml", "r"))[:default_staff]
+  INSTRUMENTS.default = Rubypond.instrument_default_staff_values
 
   INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
     eval <<-RUBY
