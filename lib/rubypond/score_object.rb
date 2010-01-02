@@ -17,6 +17,10 @@ module Rubypond
     # @private
     def s(*args)
       @contents << InvisibleRest.new(*args)
-    end    
+    end
+    
+    def t(*args, &block)
+      @contents << Tuplet.new(*args, &block)
+    end
   end
 end
