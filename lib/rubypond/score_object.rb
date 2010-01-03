@@ -32,5 +32,12 @@ module Rubypond
     def t(*args, &block)
       @contents << Tuplet.new(*args, &block)
     end
+
+    ##
+    # Add a <tt>TimeSignature</tt> to the object's contents.
+    # Params are the same as would be given to <tt>TimeSignature.new</tt>.
+    def time(*args)
+      @contents << TimeSignature.new(*args)
+    end
   end
 end
