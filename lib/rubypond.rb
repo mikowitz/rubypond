@@ -6,6 +6,8 @@ require 'introitus'
 %w{ score_object accidental flat natural note phrase pitch rest score sharp staff time_signature tuplet }.each {|file| require file }
 
 module Rubypond
+  BASE_SUBDIVISION_VALUE = 16.0
+
   ##
   # Returns current version of Rubypond
   #
@@ -50,7 +52,7 @@ module Rubypond
   # @param [Numeric] duration
   # @return [String] Lilypond
   def self.duration(duration)
-    duration = duration / 16.0
+    duration = duration / BASE_SUBDIVISION_VALUE
     remainder = duration - duration.nearest_power_of
     string = (1/duration.nearest_power_of).to_s
     while remainder > 0
