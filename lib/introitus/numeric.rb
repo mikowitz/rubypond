@@ -17,7 +17,7 @@ class Numeric
   #
   # @return [boolean]
   def valid_subdiv?
-    self.mod_power_of(2).zero?
+    self.mod_power_of(2).zero? && self > 0
   end
   
   ##
