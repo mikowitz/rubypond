@@ -6,7 +6,7 @@ module Rubypond
   module ScoreObject
     ##
     # Add a <tt>Clef</tt> to the object's contents.
-    # Params are the same as would be given to <tt>Cleff.new</tt>.
+    # Params are the same as would be given to <tt>Clef.new</tt>.
     def clef(*args)
       @contents << Clef.new(*args)
     end
