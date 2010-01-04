@@ -6,7 +6,7 @@ module Rubypond
   module ScoreObject
 
     def clef(*args)
-      @contents << Clef.new(:treble)
+      @contents << Clef.new(*args)
     end
 
     ##
