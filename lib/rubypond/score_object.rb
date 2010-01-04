@@ -4,7 +4,9 @@ module Rubypond
   # musical objects (notes, rests, etc.) into an object's
   # <tt>@contents</tt> array.
   module ScoreObject
-
+    ##
+    # Add a <tt>Clef</tt> to the object's contents.
+    # Params are the same as would be given to <tt>Cleff.new</tt>.
     def clef(*args)
       @contents << Clef.new(*args)
     end
