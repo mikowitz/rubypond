@@ -6,9 +6,9 @@ describe "Clef" do
     @clef2 = Clef.new(:tenor)
   end
   
-  it "should have the correct value for :clef" do
-    @clef1.clef.should == "treble"
-    @clef2.clef.should == "tenor"
+  it "should have the correct value for :clef_name" do
+    @clef1.clef_name.should == "treble"
+    @clef2.clef_name.should == "tenor"
   end
   
   it "should not have a :reference_note before :to_s is called" do
