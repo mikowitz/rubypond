@@ -61,7 +61,7 @@ module Rubypond
     # @private
     # @return [String] Lilypond
     def staff_clef
-      "\\clef #{clef}"
+      "\\clef #{instrument_clef}"
     end
     
     ##
@@ -156,7 +156,7 @@ module Rubypond
     #
     # @private
     # @return [String]
-    def clef; instrument[:clef]; end
+    def instrument_clef; instrument[:clef]; end
 
     ##
     # The staff's relative_c.

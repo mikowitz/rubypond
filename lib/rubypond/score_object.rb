@@ -5,6 +5,10 @@ module Rubypond
   # <tt>@contents</tt> array.
   module ScoreObject
 
+    def clef(*args)
+      @contents << Clef.new(:treble)
+    end
+
     ##
     # Add a <tt>Note</tt> to the object's contents.
     # Params are the same as would be given to <tt>Note.new</tt>.
