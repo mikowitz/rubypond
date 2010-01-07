@@ -49,5 +49,9 @@ class Object
     RUBY
   end
   
+  def has_reference_note?
+    self.respond_to?(:reference_note) && !self.reference_note.nil?
+  end
+  
   class << self; protected :create_validation_framework, :create_accessors_for; end
 end

@@ -3,7 +3,7 @@ module Rubypond
     include ScoreObject
 
     # @private
-    attr_accessor :contents, :instrument
+    attr_accessor :contents, :instrument, :reference_note
     ##
     # Additional name segment to identify individual parts for the same instrument.
     attr_accessor :name_extra
@@ -49,8 +49,13 @@ module Rubypond
     # @return [String] Lilypond
     def staff_instrument_names
       [:instrument_name, :short_instrument_name].map do |param|
-        "\\set Staff.#{param.to_s.camel_case} = \"#{self.__send__(param)}\""
+        staff_instrument_name(param)
       end.join("\n")
+    end
+    
+    # @private
+    def staff_instrument_name(name)
+      "\\set Staff.#{name.to_s.camel_case} = \"#{self.__send__(name)}\""      
     end
     
     ##
@@ -73,7 +78,8 @@ module Rubypond
       ref_note = Note.new(relative_c_note.pitches, (this_reference_note || relative_c_note).duration)
       temp_objects = [ref_note] + @contents
       temp_objects.map_with_index! do |object, index|
-        begin temp_objects[index + 1].to_s(object.reference_note) rescue nil end
+        @reference_note = object.reference_note if object.has_reference_note?
+        begin temp_objects[index + 1].to_s(@reference_note) rescue temp_objects[index + 1].to_s end
       end
       temp_objects.compact.to_strings_of_length.join("\n")
     end
@@ -91,11 +97,6 @@ module Rubypond
     # @private
     def contents_reference_note_duration(this_reference_note=nil)
       (this_reference_note || relative_c_note).duration
-    end
-
-    # @private
-    def reference_note
-      contents.last.reference_note
     end
 
     ##
