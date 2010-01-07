@@ -45,5 +45,20 @@ module Rubypond
     def time(*args)
       @contents << TimeSignature.new(*args)
     end
+
+    def o(ottavation, &block)
+      @contents << "\\ottava #{ottavation_string(ottavation)}"
+      instance_eval(&block) if block_given?
+      @contents << "\\ottava #0"
+    end
+
+    def ottavation_string(ottavation)
+      case ottavation.to_s
+      when "8va" then "#1"
+      when "15ma" then "#2"
+      when "8vb" then "#-1"
+      when "15mb" then "#-2"
+      end
+    end
   end
 end

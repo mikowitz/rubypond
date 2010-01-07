@@ -34,7 +34,7 @@ describe "Phrase" do
       @phrase = Phrase.new do
         n c4, 4
         n d4, 2
-        eight_va do
+        o "8va" do
           n ef4, 1
           n fs4, 1
           n d5, 3
