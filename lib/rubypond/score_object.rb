@@ -19,6 +19,18 @@ module Rubypond
     end
 
     ##
+    # Wraps the content in the provided block in an ottavation, which defaults to "8va"
+    # Other supported ottavations are: "8vb," "15ma," "15mb."
+    #
+    # @param [String] ottavation
+    def o(ottavation="8va", &block)
+      return unless block_given?
+      @contents << "\\ottava #{ottavation_string(ottavation)}"
+      instance_eval(&block)
+      @contents << "\\ottava #0"
+    end
+
+    ##
     # Add a <tt>Rest</tt> to the object's contents.
     # Params are the same as would be given to <tt>Note.Rest</tt>.
     def r(*args)
@@ -46,19 +58,12 @@ module Rubypond
       @contents << TimeSignature.new(*args)
     end
 
-    def o(ottavation, &block)
-      @contents << "\\ottava #{ottavation_string(ottavation)}"
-      instance_eval(&block) if block_given?
-      @contents << "\\ottava #0"
-    end
+    # @private
+    OTTAVATIONS = {"8va" => "#1", "15ma" => "#2", "8vb" => "#-1", "15mb" => "#-2"}
 
+    # @private
     def ottavation_string(ottavation)
-      case ottavation.to_s
-      when "8va" then "#1"
-      when "15ma" then "#2"
-      when "8vb" then "#-1"
-      when "15mb" then "#-2"
-      end
+      OTTAVATIONS.fetch(ottavation.to_s) {"#1"}
     end
   end
 end
