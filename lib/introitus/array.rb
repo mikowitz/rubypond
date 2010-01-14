@@ -5,7 +5,7 @@ class Array
   #
   # @return [Float]
   def sum
-    self.flatten.map{|item| item.to_f }.inject(&:+)
+    self.map{|item| Array(item)}.flatten.map(&:to_f).inject(&:+)
   end
 
   ##
@@ -53,7 +53,7 @@ class Array
   # @private
   # @return [String]
   def to_string
-    self.flatten.map{|item| item.to_s }.join(" ")
+    self.flatten.map(&:to_s).join(" ")
   end
 
   protected :find_string_of_length, :str_length, :to_string

@@ -27,7 +27,7 @@ describe "Array" do
     end
     
     it "should return the correct value for @arr5" do
-      @arr5.sum.should == 6.0
+      @arr5.sum.should == 9.0
     end
   end
   
