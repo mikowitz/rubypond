@@ -4,11 +4,16 @@ module Rubypond
   # musical objects (notes, rests, etc.) into an object's
   # <tt>@contents</tt> array.
   module ScoreObject
+
+    ALLOWED_CLEFS = %w{ alto baritone bass percussion tenor treble }
     ##
     # Add a <tt>Clef</tt> to the object's contents.
-    # Params are the same as would be given to <tt>Clef.new</tt>.
-    def clef(*args)
-      @contents << Clef.new(*args)
+    #
+    # @param [String] clef_name
+    def clef(clef_name)
+      clef_name = clef_name.to_s
+      return unless ALLOWED_CLEFS.include?(clef_name)
+      @contents << "\\clef #{clef_name}"
     end
 
     ##
