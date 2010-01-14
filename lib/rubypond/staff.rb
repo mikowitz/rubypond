@@ -109,6 +109,9 @@ module Rubypond
       Note.new(eval(relative_c), 4)
     end
 
+    # @private
+    RELATIVE_C_STRINGS = {"c4" => "c'", "c3" => "c", "c2" => "c,"}
+
     ##
     # Returns a Lilypond string representation
     # of the <tt>Staff</tt>'s <tt>relative_c</tt> string.
@@ -116,11 +119,7 @@ module Rubypond
     # @private
     # @return [String] relative_c
     def relative_c_string
-      this_c = case relative_c
-      when "c4" then "c'"
-      when "c3" then "c"
-      when "c2" then "c,"
-      end
+      this_c = RELATIVE_C_STRINGS.fetch(relative_c) {"c'"}
       "\\relative #{this_c}"
     end
 
