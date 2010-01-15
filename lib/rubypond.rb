@@ -3,7 +3,7 @@ $:.unshift File.join File.dirname(__FILE__), "rubypond"
 $:.unshift File.join File.dirname(__FILE__), "seeds"
 
 require 'introitus'
-%w{ score_object accidental flat natural note phrase pitch rest score sharp staff time_signature tuplet }.each {|file| require file }
+%w{ score_object accidental flat natural note phrase pitch rest score sharp staff tuplet }.each {|file| require file }
 
 module Rubypond
   BASE_SUBDIVISION_VALUE = 16.0

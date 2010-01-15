@@ -57,10 +57,13 @@ module Rubypond
     end
 
     ##
-    # Add a <tt>TimeSignature</tt> to the object's contents.
-    # Params are the same as would be given to <tt>TimeSignature.new</tt>.
+    # Adds a time signature to the object's contents.
+    #
+    # @example
+    #   time(2,4) #=> "\\time 2/4"
+    # @params [Integer, Integer] beats, subdivision
     def time(*args)
-      @contents << TimeSignature.new(*args)
+      @contents << "\\time #{args[0..1].join("/")}"
     end
 
     # @private
