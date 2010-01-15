@@ -76,12 +76,8 @@ module Rubypond
     # @return [String] Lilypond
     def staff_contents(this_reference_note=nil)
       ref_note = Note.new(relative_c_note.pitches, (this_reference_note || relative_c_note).duration)
-      temp_objects = [ref_note] + @contents
-      temp_objects.map_with_index! do |object, index|
-        @reference_note = object.reference_note if object.has_reference_note?
-        begin temp_objects[index + 1].to_s(@reference_note) rescue temp_objects[index + 1].to_s end
-      end
-      temp_objects.compact.to_strings_of_length.join("\n")
+      @reference_note, final_string = Rubypond.build_contents_string(@contents, ref_note)
+      final_string
     end
     
     # @private

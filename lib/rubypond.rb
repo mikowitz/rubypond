@@ -62,6 +62,16 @@ module Rubypond
     string
   end
 
+  def self.build_contents_string(objects, relative_note)
+    this_reference_note = nil
+    objects = [relative_note] + objects
+    objects.map_with_index! do |object, index|
+      this_reference_note = object.reference_note if object.has_reference_note?
+      begin objects[index + 1].to_s(this_reference_note) rescue objects[index + 1].to_s end
+    end
+    [this_reference_note, objects.compact.to_strings_of_length.join("\n")]
+  end
+
   STRINGS = Rubypond.load_config_file("instruments/strings.yml")
   WOODWINDS = Rubypond.load_config_file("instruments/woodwinds.yml")
   BRASS = Rubypond.load_config_file("instruments/brass.yml")
