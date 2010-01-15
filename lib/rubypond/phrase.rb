@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + "/score_object"
-
 module Rubypond
   class Phrase
     include ScoreObject
