@@ -43,6 +43,14 @@ module Rubypond
     end
 
     ##
+    # Adds a duration space for a pick-up measure
+    #
+    # @param [Numeric] duration
+    def partial(duration)
+      @contents << "\\partial #{Rubypond.duration(duration)}"
+    end
+
+    ##
     # Add a <tt>Rest</tt> to the object's contents.
     # Params are the same as would be given to <tt>Note.Rest</tt>.
     def r(*args)
