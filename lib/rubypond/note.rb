@@ -1,10 +1,14 @@
 module Rubypond
   class Note
     attr_validate :pitches, :duration
+
+    # @private
+    attr_accessor :ornaments
     
     def initialize(pitches, duration, *ornaments)
       @pitches, @duration = Array(pitches).sort, duration
-      @tied = ornaments.include?(:~)
+      @ornaments = ornaments
+      @tied = ornaments.delete(:~)
       self.validate
     end
     
@@ -18,6 +22,7 @@ module Rubypond
       [
         build_pitches_string(relative_note.reference_pitch),
         build_duration_string(relative_note.reference_duration),
+        ornament_string,
         tie_string
       ].join("")
     end
@@ -73,10 +78,18 @@ module Rubypond
       Rubypond.duration(duration)
     end
 
+    ##
+    # @private
+    def ornament_string
+      @ornaments.select{|ornament| Rubypond::ORNAMENTS.keys.include?(ornament)}.
+        map{|ornament| Rubypond::ORNAMENTS[ornament]}.join("")
+    end
+
+    ##
+    # @private
     def tie_string
       tied? ? " ~" : ""
     end
-
 
     ##
     # Is this note tied?

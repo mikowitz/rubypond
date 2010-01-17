@@ -167,6 +167,52 @@ describe "Note" do
       @note1.to_s.should == "c ~"
     end
   end
+
+  describe "with ornaments" do
+    describe "starting a beam" do
+      before do
+        @note1 = Note.new(cs4, 4, :sb)
+      end
+
+      it "should return the correct value for :pitches" do
+        @note1.pitches.should == [cs4]
+      end
+
+      it "should return the correct value for :duration" do
+        @note1.duration.should == 4
+      end
+
+      it "should not be tied" do
+        @note1.should_not be_tied
+      end
+
+      it "should return the correct value for to_s" do
+        @note1.to_s.should == "cs["
+      end
+    end
+    
+    describe "ending a beam" do
+      before do
+        @note1 = Note.new(d5, 2, :eb, :~)
+      end
+
+      it "should return the correct value for :pitches" do
+        @note1.pitches.should == [d5]
+      end
+
+      it "should return the correct value for :duration" do
+        @note1.duration.should == 2
+      end
+
+      it "should be tied" do
+        @note1.should be_tied
+      end
+
+      it "should return the correct value for to_s" do
+        @note1.to_s.should == "d'8] ~"
+      end
+    end
+  end
   
   describe "following a note of the same duration" do
     before do

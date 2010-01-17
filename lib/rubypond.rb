@@ -72,6 +72,8 @@ module Rubypond
     [this_reference_note, objects.compact.to_strings_of_length.join("\n")]
   end
 
+  ORNAMENTS = Rubypond.load_config_file("ornaments.yml")
+
   STRINGS = Rubypond.load_config_file("instruments/strings.yml")
   WOODWINDS = Rubypond.load_config_file("instruments/woodwinds.yml")
   BRASS = Rubypond.load_config_file("instruments/brass.yml")

@@ -118,6 +118,16 @@ describe "Rubypond" do
     end
   end
   
+  describe "\b::ORNAMENTS" do
+    it "\b[:sb] should be correct" do
+      Rubypond::ORNAMENTS[:sb].should == "["
+    end
+
+    it "\b[:eb] should be correct" do
+      Rubypond::ORNAMENTS[:eb].should == "]"
+    end
+  end
+  
   describe "\b.duration" do
     it "should return the correct value for 0.125" do
       Rubypond.duration(0.125).should == "128"
