@@ -29,6 +29,10 @@ describe "Note" do
       @note.duration.should == 4
     end
 
+    it "should not be tied" do
+      @note.should_not be_tied
+    end
+
     it "should return the correct value for :reference_pitch" do
       @note.reference_pitch.should == c4
     end
@@ -139,6 +143,28 @@ describe "Note" do
     
     it "should return the correct_value for :to_s relative to Note.new(c3, 2)" do
       @note.to_s(@c32).should == "<c' e' fs>"
+    end
+  end
+  
+  describe "with a tie" do
+    before do
+      @note1 = Note.new(c4, 4, :~)
+    end
+
+    it "should return the correct value for :pitches" do
+      @note1.pitches.should == [c4]
+    end
+
+    it "should return the correct value for :duration" do
+      @note1.duration.should == 4
+    end
+
+    it "should be tied" do
+      @note1.should be_tied
+    end
+
+    it "should return the correct value for to_s" do
+      @note1.to_s.should == "c ~"
     end
   end
   
