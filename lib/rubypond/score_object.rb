@@ -16,6 +16,13 @@ module Rubypond
       @contents << "\\clef #{clef_name}"
     end
 
+    ALLOWED_MODES = %w{ ionian major dorian phrygian lydian mixolydian aeolian minor locrian }
+
+    def key(note, mode)
+      return unless ALLOWED_MODES.include?(mode.to_s)
+      @contents << "\\key #{note.name} \\#{mode.to_s}"
+    end
+
     ##
     # Add a <tt>Note</tt> to the object's contents.
     # Params are the same as would be given to <tt>Note.new</tt>.
