@@ -83,7 +83,7 @@ module Rubypond
 
   ##
   # A hash of instrument properties: instrument_name, short_instrument_name, display_name, relative_c, and clef.
-  INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS) #.merge(VOICES)
+  INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS)
   INSTRUMENTS.default = Rubypond.instrument_default_staff_values
 
   INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
