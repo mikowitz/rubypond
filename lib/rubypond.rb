@@ -73,6 +73,8 @@ module Rubypond
   end
 
   ORNAMENTS = Rubypond.load_config_file("ornaments.yml")
+  
+  DYNAMICS = %w{ ppppp pppp ppp pp p mp mf f ff fff ffff fp sf sff sp spp sfz rfz }
 
   STRINGS = Rubypond.load_config_file("instruments/strings.yml")
   WOODWINDS = Rubypond.load_config_file("instruments/woodwinds.yml")

@@ -214,6 +214,24 @@ describe "Note" do
     end
   end
   
+  describe "with dynamics" do
+    it "should show a single dynamic" do
+      Note.new(c4, 4, :mf).to_s.should == "c\\mf"
+    end
+    
+    it "should show a dynamic + crescendo" do
+      Note.new(c4, 4, :<, :mf).to_s.should == "c\\mf\\<"
+    end
+
+    it "should show a decrescendo" do
+      Note.new(c4, 4, :>).to_s.should == "c\\>"
+    end
+    
+    it "should show an end dynamic" do
+      Note.new(c4, 4, :edyn).to_s.should == "c\\!"
+    end        
+  end
+  
   describe "following a note of the same duration" do
     before do
       @note1 = Note.new(d4, 4)

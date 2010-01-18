@@ -8,6 +8,7 @@ module Rubypond
     def initialize(pitches, duration, *ornaments)
       @pitches, @duration = Array(pitches).sort, duration
       @ornaments = ornaments
+      @dynamic = ornaments.find{|ornament| Rubypond::DYNAMICS.include?(ornament.to_s)}
       @tied = ornaments.delete(:~)
       self.validate
     end
@@ -22,6 +23,7 @@ module Rubypond
       [
         build_pitches_string(relative_note.reference_pitch),
         build_duration_string(relative_note.reference_duration),
+        dynamic_string,
         ornament_string,
         tie_string
       ].join("")
@@ -76,6 +78,10 @@ module Rubypond
     def build_duration_string(this_reference_duration)
       return "" if duration == this_reference_duration
       Rubypond.duration(duration)
+    end
+
+    def dynamic_string
+      @dynamic ? "\\#{@dynamic.to_s}" : ""
     end
 
     ##
