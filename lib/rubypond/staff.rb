@@ -39,7 +39,6 @@ module Rubypond
       [display_name, "=", relative_c_string, "{"].join(" ")
     end
 
-
     ##
     # Sets the staff's instrument name and abbreviation.
     #
@@ -191,6 +190,45 @@ module Rubypond
     # @return [Symbol] instrument name
     def class_instrument
       self.class.to_s.downcase.split("::").last.to_sym
+    end
+  end
+
+  class VocalStaff < Staff
+    def initialize(name_extra=nil, &block)
+      @name_extra, @contents, @lyrics = name_extra, [], []
+      @instrument = Rubypond::VOICES[self.class_instrument]
+      instance_eval(&block) if block_given?
+    end
+
+    ##
+    # Returns the Lilypond string representation
+    # of the <tt>VocalStaff</tt>'s <tt>contents</tt> array.
+    #
+    # @return [String] Lilypond
+    def to_s(reference_note=nil)
+      [ staff_name_relative_opening_tag,
+        staff_instrument_names,
+        staff_clef,
+        staff_contents(reference_note),
+        staff_closing_tag,
+        lyrics_block_string
+      ].join("\n")
+    end
+
+    ##
+    #
+    # @private
+    # @return [String] lyrics
+    def lyrics_block
+      @lyrics.map {|lyric| "\\addlyrics { #{lyric} }"}.join("\n")
+    end
+
+    ##
+    # Adds a lyric line to the staff.
+    #
+    # @param [String] lyrics
+    def lyrics(lyrics)
+      @lyrics << lyrics
     end
   end
 end
