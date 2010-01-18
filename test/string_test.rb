@@ -14,5 +14,9 @@ describe "String" do
     it "should return the correct result for 'a_much_longer_method_name'" do
       @long_name_two.camel_case.should == "aMuchLongerMethodName"
     end
+
+    it "should not modify 'aMethodAlreadyInCamelCase'" do
+      "aMethodAlreadyInCamelCase".camel_case.should == "aMethodAlreadyInCamelCase"
+    end
   end
 end
