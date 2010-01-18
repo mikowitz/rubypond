@@ -1,0 +1,29 @@
+---
+:soprano:
+  :instrument_name: Soprano
+  :short_instrument_name: Sop.
+  :class_name: Soprano
+  :display_name: soprano
+  :relative_c: c5
+  :clef: treble
+:alto:
+  :instrument_name: Alto
+  :short_instrument_name: Alt.
+  :class_name: Alto
+  :display_name: alto
+  :relative_c: c4
+  :clef: treble 
+:tenor:
+  :instrument_name: Tenor
+  :short_instrument_name: Ten.
+  :class_name: Tenor
+  :display_name: tenor
+  :relative_c: c4
+  :clef: treble_8
+:bass:
+  :instrument_name: Bass
+  :short_instrument_name: Bs
+  :class_name: Bass
+  :display_name: bass
+  :relative_c: c3
+  :clef: bass

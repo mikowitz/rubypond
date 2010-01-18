@@ -79,16 +79,25 @@ module Rubypond
   STRINGS = Rubypond.load_config_file("instruments/strings.yml")
   WOODWINDS = Rubypond.load_config_file("instruments/woodwinds.yml")
   BRASS = Rubypond.load_config_file("instruments/brass.yml")
+  VOICES = Rubypond.load_config_file("instruments/voices.yml")
 
   ##
   # A hash of instrument properties: instrument_name, short_instrument_name, display_name, relative_c, and clef.
-  INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS)
+  INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS) #.merge(VOICES)
   INSTRUMENTS.default = Rubypond.instrument_default_staff_values
 
   INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
     eval <<-RUBY
       # @private
       class #{klass_name} < Staff
+      end
+    RUBY
+  end
+
+  VOICES.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
+    eval <<-RUBY
+      # @private
+      class #{klass_name} < VocalStaff
       end
     RUBY
   end
