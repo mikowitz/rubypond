@@ -219,7 +219,7 @@ module Rubypond
     #
     # @private
     # @return [String] lyrics
-    def lyrics_block
+    def lyrics_block_string
       @lyrics.map {|lyric| "\\addlyrics { #{lyric} }"}.join("\n")
     end
 
