@@ -17,19 +17,19 @@ describe "Voice" do
   
     it "should have the correct contents" do
       @voice.contents.size.should == 2
-      @voice.contents[0].first.size.should == 3
-      @voice.contents[1].first.size.should == 4
+      @voice.contents[0].contents.size.should == 3
+      @voice.contents[1].contents.size.should == 4
     end
     
     it "should return the correct data for to_s" do
       @string = @voice.to_s
       @string.should =~ /\{ c r2 d4 \}/
       @string.should =~ /\\\\/
-      @string.should =~ /\{ c,2 e8. f8. d8 \}/
+      @string.should =~ /\{ c,2 e8. f d8 \}/
     end
     
     it "should return the correct reference_note" do
-      @voice.reference_note.should = Note.new(d3, 2)
+      @voice.reference_note.should == Note.new(d3, 2)
     end
   end
   
@@ -48,8 +48,8 @@ describe "Voice" do
   
     it "should have the correct contents" do
       @voice.contents.size.should == 2
-      @voice.contents[0].first.size.should == 3
-      @voice.contents[1].first.size.should == 3
+      @voice.contents[0].contents.size.should == 3
+      @voice.contents[1].contents.size.should == 3
     end
     
     it "should return the correct data for to_s" do
@@ -60,7 +60,7 @@ describe "Voice" do
     end
     
     it "should return the correct reference_note" do
-      @voice.reference_note.should = Note.new(a3, 4)
+      @voice.reference_note.should == Note.new(a3, 4)
     end
   end
 end
