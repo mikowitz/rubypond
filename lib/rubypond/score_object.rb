@@ -89,6 +89,7 @@ module Rubypond
       OTTAVATIONS.fetch(ottavation.to_s) {"#1"}
     end
 
+    # @private
     def method_missing(method, *args, &block)
       @contents << "\\#{method.to_s.camel_case}"
     end
