@@ -61,11 +61,8 @@ module Rubypond
     # @param [Pitch] this_reference_pitch
     # @return [String] Lilypond
     def build_chord_string(this_reference_pitch)
-      temp_pitches = [this_reference_pitch] + pitches
-      temp_pitches.map_with_index! do |pitch, index|
-        begin temp_pitches[index + 1].to_s(pitch) rescue nil end
-      end
-      "<#{temp_pitches.compact.join(" ")}>"
+      _these_pitches = Rubypond.build_note_or_tuplet_string(pitches, this_reference_pitch)
+      "<#{_these_pitches}>"
     end
     
     ##
@@ -76,8 +73,9 @@ module Rubypond
     # @param [Numeric] this_reference_duration
     # @return [String] Lilypond
     def build_duration_string(this_reference_duration)
-      return "" if duration == this_reference_duration
-      Rubypond.duration(duration)
+      _duration = self.duration
+      return "" if _duration == this_reference_duration
+      Rubypond.duration(_duration)
     end
 
     def dynamic_string
@@ -144,7 +142,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_pitches
-      raise(ArgumentError, "Invalid note pitches: #{pitches.inspect}") unless pitches.all?{|pitch| pitch.is_a?(Pitch)}
+      _pitches = self.pitches
+      raise(ArgumentError, "Invalid note pitches: #{_pitches.inspect}") unless _pitches.all?{|pitch| pitch.is_a?(Pitch)}
     end
 
     ##
@@ -153,7 +152,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_duration
-      raise(ArgumentError, "Invalid note duration: #{duration.inspect}") unless duration.is_a?(Numeric) && duration > 0 && (duration % 0.125).zero?
+      _duration = self.duration
+      raise(ArgumentError, "Invalid note duration: #{_duration.inspect}") unless _duration.is_a?(Numeric) && _duration.valid_duration?
     end
     
     protected :validate_pitches, :validate_duration

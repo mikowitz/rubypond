@@ -38,38 +38,68 @@ module Rubypond
   end
 
   ##
-  # The default values for a generic <tt>Staff</tt> object.
-  #
-  # @private
-  def self.instrument_default_staff_values
-    @@instrument_default_staff_values ||= Rubypond.load_config_file("default_staff_values.yml")[:default_staff]
-  end
-
-  ##
   # Returns the Lilypond representation of a duration lasting
   # <tt>duration</tt> sixteenth notes.
   #
   # @param [Numeric] duration
   # @return [String] Lilypond
   def self.duration(duration)
-    duration = duration / BASE_SUBDIVISION_VALUE
-    remainder = duration - duration.nearest_power_of
-    string = (1/duration.nearest_power_of).to_s
-    while remainder > 0
-      remainder -= remainder.nearest_power_of
-      string += "."
+    _remainder, _string = Rubypond.prepare_base_duration_string(duration)
+    while _remainder > 0
+      _remainder, _string = Rubypond.add_dots_to_duration(_remainder, _string)
     end
-    string
+    _string
   end
 
+  # @private
+  def self.prepare_base_duration_string(duration)
+    _duration = duration / BASE_SUBDIVISION_VALUE
+    _nearest_power_of_duration = _duration.nearest_power_of
+    _remainder = _duration - _nearest_power_of_duration
+    _string = (1/_nearest_power_of_duration).to_s
+    [_remainder, _string]
+  end
+
+  # @private
+  def self.add_dots_to_duration(remainder, string)
+    _remainder = remainder - remainder.nearest_power_of
+    _string = "#{string}."
+    [_remainder, _string]
+  end
+
+  # @private
   def self.build_contents_string(objects, relative_note)
-    this_reference_note = nil
-    objects = [relative_note] + objects
-    objects.map_with_index! do |object, index|
+    this_reference_note, _objects = nil, Rubypond.prepare_contents(objects, relative_note)
+    _objects.map_with_index! do |object, index|
       this_reference_note = object.reference_note if object.has_reference_note?
-      begin objects[index + 1].to_s(this_reference_note) rescue objects[index + 1].to_s end
+      Rubypond.object_to_s(_objects[index + 1], this_reference_note)
     end
-    [this_reference_note, objects.compact.to_strings_of_length.join("\n")]
+    [this_reference_note, Rubypond.final_contents_string(_objects)]
+  end
+  
+  # @private
+  def self.final_contents_string(objects)
+    objects.compact.to_strings_of_length.join("\n")
+  end
+  
+  # @private
+  def self.prepare_contents(objects, relative_note)
+    [relative_note] + objects
+  end
+  
+  # @private
+  def self.object_to_s(object, reference_note, return_object=object)
+    begin object.to_s(reference_note) rescue return_object end
+  end
+  
+  
+  def self.build_note_or_tuplet_string(objects, relative_note)
+    _objects = Rubypond.prepare_contents(objects, relative_note)
+    _objects.map_with_index! do |object, index|
+      _reference_object = object.is_a?(Pitch) ? object : object.reference_note
+      Rubypond.object_to_s(_objects[index + 1], _reference_object, nil)
+    end
+    _objects.compact.join(" ")
   end
 
   ORNAMENTS = Rubypond.load_config_file("ornaments.yml")
@@ -83,8 +113,9 @@ module Rubypond
 
   ##
   # A hash of instrument properties: instrument_name, short_instrument_name, display_name, relative_c, and clef.
+  INSTRUMENT_DEFAULT_STAFF_VALUES = Rubypond.load_config_file("default_staff_values.yml")[:default_staff]
   INSTRUMENTS = STRINGS.merge(WOODWINDS).merge(BRASS)
-  INSTRUMENTS.default = Rubypond.instrument_default_staff_values
+  INSTRUMENTS.default = INSTRUMENT_DEFAULT_STAFF_VALUES
 
   INSTRUMENTS.values.map{|instrument| instrument[:class_name]}.each do |klass_name|
     eval <<-RUBY

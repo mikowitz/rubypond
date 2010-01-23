@@ -30,4 +30,18 @@ describe "Numeric" do
       end
     end
   end
+  
+  describe "\b#valid_duration?" do
+    [1, 2, 1.5, 1.125, 0.25].each do |duration|
+      it "should return the correct value for #{duration}" do
+        duration.should be_valid_duration
+      end
+    end
+
+    [1.3333, -1].each do |duration|
+      it "should return the correct value for #{duration}" do
+        duration.should_not be_valid_duration
+      end
+    end
+  end
 end

@@ -19,8 +19,9 @@ module Rubypond
     ALLOWED_MODES = %w{ ionian major dorian phrygian lydian mixolydian aeolian minor locrian }
 
     def key(note, mode)
-      return unless ALLOWED_MODES.include?(mode.to_s)
-      @contents << "\\key #{note.name} \\#{mode.to_s}"
+      mode = mode.to_s
+      return unless ALLOWED_MODES.include?(mode)
+      @contents << "\\key #{note.name} \\#{mode}"
     end
 
     ##

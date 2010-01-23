@@ -25,8 +25,9 @@ module Rubypond
     # @private
     # @return [String]
     def build_duration_string(this_reference_duration)
-      return "" if duration == this_reference_duration
-      Rubypond.duration(duration)
+      _duration = self.duration
+      return "" if _duration == this_reference_duration
+      Rubypond.duration(_duration)
     end
     
     # @private
@@ -43,7 +44,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_duration
-      raise(ArgumentError, "Invalid note duration: #{duration.inspect}") unless duration.is_a?(Numeric) && duration > 0 && (duration % 0.125).zero?
+      _duration = self.duration
+      raise(ArgumentError, "Invalid note duration: #{_duration.inspect}") unless _duration.is_a?(Numeric) && _duration.valid_duration?
     end
     
     protected :validate_duration

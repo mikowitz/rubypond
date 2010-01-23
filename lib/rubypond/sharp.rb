@@ -44,7 +44,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_accidental
-      raise(ArgumentError, "Invalid sharp accidental: #{accidental}") unless accidental.is_a?(Accidental)
+      _accidental = self.accidental
+      raise(ArgumentError, "Invalid sharp accidental: #{_accidental}") unless _accidental.is_a?(Accidental)
     end
     
     protected :validate_accidental

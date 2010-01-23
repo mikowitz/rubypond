@@ -20,6 +20,10 @@ class Numeric
     self.mod_power_of(2).zero? && self > 0
   end
   
+  def valid_duration?
+    self > 0 && (self % 0.125).zero?
+  end
+  
   ##
   # Returns <tt>self</tt> modulo <tt>self.nearest_power_of(base)</tt>.
   #

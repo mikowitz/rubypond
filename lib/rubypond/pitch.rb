@@ -25,12 +25,9 @@ module Rubypond
     # @param [Pitch] relative_pitch
     # @return [String] Lilypond
     def to_s(relative_pitch=c4)
-      octave_change = set_octave_change(relative_pitch)
-      if self > relative_pitch
-        accidental.name + ("'" * octave_change)
-      else
-        accidental.name + ("," * octave_change)
-      end            
+      _octave_change = set_octave_change(relative_pitch)
+      _octave_modifier = self > relative_pitch ? "'" : ","
+      accidental.name + (_octave_modifier * _octave_change)
     end
     
     ##
@@ -79,10 +76,11 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_accidental
+      _accidental = self.accidental
       if octave.nil?
-        raise(ArgumentError, "Invalid pitch midi value: #{accidental}") unless accidental.is_a?(Fixnum) && accidental.between?(0, 127)
+        raise(ArgumentError, "Invalid pitch midi value: #{_accidental}") unless _accidental.is_a?(Fixnum) && _accidental.between?(0, 127)
       else
-        raise(ArgumentError, "Invalid pitch accidental: #{accidental}") unless accidental.is_a?(Accidental)
+        raise(ArgumentError, "Invalid pitch accidental: #{_accidental}") unless _accidental.is_a?(Accidental)
       end
     end
     
@@ -92,7 +90,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_octave
-      raise(ArgumentError, "Invalid pitch octave: #{octave}") if octave && (!octave.is_a?(Fixnum) || !octave.between?(0, 9))
+      _octave = self.octave
+      raise(ArgumentError, "Invalid pitch octave: #{_octave}") if _octave && (!_octave.is_a?(Fixnum) || !_octave.between?(0, 9))
     end
     
     protected :validate_accidental, :validate_octave

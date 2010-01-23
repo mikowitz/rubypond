@@ -34,7 +34,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_name
-      raise(ArgumentError, "Invalid natural name: #{name}") unless %w{ c d e f g a b }.include?(name)
+      _name = self.name
+      raise(ArgumentError, "Invalid natural name: #{_name}") unless %w{ c d e f g a b }.include?(_name)
     end
 
     ##
@@ -43,7 +44,8 @@ module Rubypond
     # @private
     # @raise [ArgumentError]
     def validate_offset
-      raise(ArgumentError, "Invalid natural offset: #{offset}") unless offset.is_a?(Fixnum) and offset >= 0
+      _offset = self.offset
+      raise(ArgumentError, "Invalid natural offset: #{_offset}") unless _offset.is_a?(Fixnum) and _offset >= 0
     end
     
     protected :validate_name, :validate_offset

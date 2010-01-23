@@ -47,8 +47,8 @@ module Rubypond
     def method_missing(method, *args, &block)
       super(method, *args, &block) unless ALLOWED_VOICE_METHODS.include?(method.to_sym)
       return unless block_given?
-      p = Phrase.new(&block)
-      @contents << p
+      phrase = Phrase.new(&block)
+      @contents << phrase
       return self
     end
   end

@@ -15,12 +15,12 @@ class Array
   # @param [Fixnum] length the length that each string should be equal or close to
   # @return [Array] the array of strings
   def to_strings_of_length(length=50)
-    this, ret = self.dup, []
-    while !this.empty?
-      new_str, this = this.find_string_of_length(length)
-      ret << new_str
+    _this, _ret = self.dup, []
+    while !_this.empty?
+      _new_str, _this = _this.find_string_of_length(length)
+      _ret << _new_str
     end
-    ret
+    _ret
   end
   
   ##
@@ -31,11 +31,11 @@ class Array
   # @param [Fixnum] length
   # @return [String, Array]
   def find_string_of_length(length=50)
-    this, new_str = self.dup, []
-    until new_str.str_length >= length
-      new_str << this.shift
+    _this, _new_str = self.dup, []
+    until _new_str.str_length >= length
+      _new_str << _this.shift
     end
-    [new_str.to_string.strip, this]
+    [_new_str.to_string.strip, _this]
   end
   
   ##

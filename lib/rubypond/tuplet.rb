@@ -38,11 +38,8 @@ module Rubypond
     
     # @private
     def tuplet_contents(this_reference_note)
-      these_contents = [this_reference_note] + @contents
-      these_contents.map_with_index! do |object, index|
-        begin these_contents[index + 1].to_s(object.reference_note) rescue nil end
-      end
-      these_contents.compact.join(" ")
+      _these_contents = Rubypond.build_note_or_tuplet_string(@contents, this_reference_note)
+      _these_contents
     end
     
     # @private

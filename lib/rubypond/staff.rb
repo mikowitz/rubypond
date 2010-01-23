@@ -74,7 +74,8 @@ module Rubypond
     # @private
     # @return [String] Lilypond
     def staff_contents(this_reference_note=nil)
-      ref_note = Note.new(relative_c_note.pitches, (this_reference_note || relative_c_note).duration)
+      _relative_c = relative_c_note
+      ref_note = Note.new(_relative_c.pitches, (this_reference_note || _relative_c).duration)
       @reference_note, final_string = Rubypond.build_contents_string(@contents, ref_note)
       final_string
     end
@@ -168,9 +169,9 @@ module Rubypond
     # @param [String, boolean]
     # @return [String]
     def add_name_extra_to(string, with_space=true)
-      separator = with_space ? " " : ""
-      extra = with_space ? name_extra : (name_extra || "").downcase
-      [string, extra].compact.join(separator)
+      _name_extra, _separator = name_extra, (with_space ? " " : "")
+      extra = with_space ? _name_extra : (_name_extra || "").downcase
+      [string, extra].compact.join(_separator)
     end
 
     ##
