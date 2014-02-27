@@ -1,8 +1,0 @@
----
-:default_staff:
-  :instrument_name: Staff
-  :short_instrument_name: Staff
-  :class_name: Staff
-  :display_name: staff
-  :relative_c: c4
-  :clef: treble
